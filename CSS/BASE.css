@@ -350,3 +350,67 @@ noscript p {
   font-weight: 600;
   border-bottom: 3px solid #C9A96E;
 }
+
+@media (max-width: 768px) {
+
+  /* HEADER */
+  header {
+    padding: 12px 20px;
+    gap: 12px;
+  }
+
+  header img {
+    height: 55px;
+  }
+
+  header h1 {
+    font-size: 1.4em;
+  }
+
+  /* NAV */
+  nav ul {
+    padding: 6px 4px;
+  }
+
+  nav ul li a {
+    padding: 6px 9px;
+    font-size: 0.8em;
+  }
+
+  /* MAIN */
+  main {
+    margin: 16px 12px;
+    padding: 20px 18px;
+  }
+
+  main p {
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  /* TÍTULO DE PÁGINA */
+  .titulo-pagina h2 {
+    font-size: 1.3em;
+  }
+
+  .icono-pagina {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* FOOTER */
+  .footer-cuerpo {
+    flex-direction: column;
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .footer-redes-links {
+    gap: 8px;
+  }
+
+  .footer-redes-links a {
+    padding: 6px 14px;
+    font-size: 0.85em;
+  }
+}
