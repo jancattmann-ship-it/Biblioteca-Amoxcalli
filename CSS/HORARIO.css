@@ -1,0 +1,12 @@
+/* PÁRRAFOS */
+main p {
+  line-height: 1.75;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+/* FILA CERRADO */
+td.cerrado {
+  color: #b71c1c;
+  font-weight: 600;
+}

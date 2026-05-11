@@ -1,0 +1,352 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7f5;
+  color: #222222;
+}
+
+/* HEADER */
+header {
+  background-color: #1a3e1f;
+  color: white;
+  padding: 18px 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 4px solid #C9A96E;
+}
+
+header img {
+  height: 85px;
+  width: auto;
+}
+
+header div {
+  display: flex;
+  flex-direction: column;
+}
+
+header h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+header p {
+  font-size: 0.95em;
+  color: #C9A96E;
+  font-style: italic;
+}
+
+/* NAV */
+nav {
+  background-color: #1a3e1f;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid #2e6b35;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+nav ul li {
+  margin: 3px 4px;
+}
+
+nav ul li a {
+  display: block;
+  color: #e8f5e9;
+  text-decoration: none;
+  padding: 7px 13px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+nav ul li a:hover {
+  background-color: #2e6b35;
+  color: white;
+}
+
+/* Página activa con acento dorado — igual que temixco.gob.mx */
+nav ul li a.activo {
+  background-color: #2e6b35;
+  border-bottom: 3px solid #C9A96E;
+  color: #C9A96E;
+  font-weight: 600;
+}
+
+/* MAIN — contenedor general */
+main {
+  max-width: 960px;
+  margin: 32px auto;
+  background-color: white;
+  padding: 36px 44px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(26, 62, 31, 0.08);
+}
+
+main p {
+  line-height: 1.75;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+/* TITULO DE PÁGINA (ícono + h2) */
+.titulo-pagina {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  border-bottom: 3px solid #C9A96E;
+  padding-bottom: 10px;
+}
+
+.titulo-pagina h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1a3e1f;
+  font-size: 1.75em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.icono-pagina {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+}
+
+/* H2 sin .titulo-pagina */
+main h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1a3e1f;
+  font-size: 1.75em;
+  font-weight: 700;
+  margin-bottom: 16px;
+  border-bottom: 3px solid #C9A96E;
+  padding-bottom: 8px;
+}
+
+/* H3 */
+h3 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2e6b35;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-top: 28px;
+  margin-bottom: 12px;
+  border-left: 4px solid #C9A96E;
+  padding-left: 10px;
+}
+
+/* TABLAS */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  font-size: 0.95em;
+}
+
+table thead {
+  background-color: #1a3e1f;
+  color: white;
+}
+
+table th {
+  padding: 11px 15px;
+  text-align: left;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+table td {
+  padding: 10px 15px;
+  text-align: left;
+  border: 1px solid #d4e8d4;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f0f7f0;
+}
+
+table tbody tr:hover {
+  background-color: #e8f5e9;
+}
+
+/* LISTAS */
+main ul {
+  padding-left: 25px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+}
+
+main ul li {
+  line-height: 2;
+  color: #333;
+}
+
+/* BOTÓN REGRESAR */
+.btn-regresar {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 10px 22px;
+  background-color: #1a3e1f;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.95em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 2px solid transparent;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-regresar:hover {
+  background-color: #2e6b35;
+  border-color: #C9A96E;
+  color: #fdf3dc;
+}
+
+/* FOOTER */
+footer {
+  background-color: #1a3e1f;
+  color: #c8e6c9;
+  margin-top: 50px;
+  font-size: 0.9em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Banda de redes sociales */
+.footer-redes {
+  background-color: #143318;
+  text-align: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid #2e6b35;
+}
+
+.footer-redes p {
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #e8f5e9;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.footer-redes-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.footer-redes-links a {
+  display: inline-block;
+  padding: 8px 22px;
+  border: 1px solid #C9A96E;
+  border-radius: 20px;
+  color: #C9A96E;
+  text-decoration: none;
+  font-size: 0.92em;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.footer-redes-links a:hover {
+  background-color: #C9A96E;
+  color: #1a3e1f;
+}
+
+/* Cuerpo del footer en 3 columnas */
+.footer-cuerpo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  padding: 36px 60px;
+  justify-content: space-between;
+}
+
+.footer-redes-links a img {
+  height: 16px;
+  width: auto;
+  vertical-align: middle;
+}
+
+.footer-col h4 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #C9A96E;
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.footer-col p,
+.footer-col li,
+.footer-col a {
+  color: #e8f5e9;
+  font-size: 0.95em;
+  line-height: 2.1;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  color: #C9A96E;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Logo en footer */
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-logo p {
+  font-size: 0.92em;
+  color: #e8f5e9;
+  line-height: 1.7;
+  max-width: 220px;
+}
+
+/* Línea de créditos */
+.footer-creditos {
+  border-top: 1px solid #2e6b35;
+  text-align: center;
+  padding: 16px 20px;
+  font-size: 0.88em;
+  color: #c8e6c9;
+}
+/* NOSCRIPT */
+noscript p {
+  background-color: #b71c1c;
+  color: #ffffff;
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 0.95em;
+  font-weight: 600;
+  border-bottom: 3px solid #C9A96E;
+}

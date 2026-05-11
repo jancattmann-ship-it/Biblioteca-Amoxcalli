@@ -1,0 +1,84 @@
+/* PÁRRAFOS */
+main p {
+  line-height: 1.75;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+/* TARJETAS DE SERVICIOS */
+.tarjetas-servicios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+
+.tarjeta-servicio {
+  flex: 1;
+  min-width: 255px;
+  border: 1px solid #d4e8d4;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.tarjeta-servicio:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(26, 62, 31, 0.12);
+}
+
+/* CABECERA DE TARJETA */
+.tarjeta-header {
+  background-color: #1a3e1f;
+  color: #C9A96E;
+  padding: 11px 16px;
+  font-weight: 700;
+  font-size: 0.95em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 2px solid #C9A96E;
+  transition: background-color 0.2s;
+}
+
+.tarjeta-servicio:hover .tarjeta-header {
+  background-color: #2e6b35;
+}
+
+.tarjeta-header img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+/* CUERPO DE TARJETA */
+.tarjeta-body {
+  padding: 14px 16px;
+  background-color: #f9fdf9;
+}
+
+.tarjeta-body p {
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.tarjeta-body ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.tarjeta-body ul li {
+  font-size: 0.88em;
+  line-height: 1.9;
+  color: #333;
+  border-top: 1px solid #e0f0e0;
+  padding-top: 4px;
+  margin-top: 4px;
+}

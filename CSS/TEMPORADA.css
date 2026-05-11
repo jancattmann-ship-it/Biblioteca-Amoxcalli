@@ -1,0 +1,22 @@
+/* PÁRRAFOS */
+main p {
+  line-height: 1.75;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+/* CARTEL DEL TALLER */
+.cartel-contenedor {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 22px 0;
+}
+
+.cartel-contenedor img {
+  max-width: 420px;
+  width: 100%;
+  border-radius: 10px;
+  border: 3px solid #C9A96E;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.13);
+}

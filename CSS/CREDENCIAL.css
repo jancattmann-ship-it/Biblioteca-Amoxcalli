@@ -1,0 +1,11 @@
+/* PÁRRAFOS */
+main p {
+  line-height: 1.75;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+/* LISTA */
+main ul li {
+  line-height: 2.1;
+}
