@@ -263,3 +263,46 @@ input[type="reset"]:hover {
   background-color: #f0f7f0;
   border-color: #2e6b35;
 }
+
+@media (max-width: 768px) {
+
+  /* BIENVENIDA — apila texto e imagen en columna */
+  .seccion-bienvenida {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .seccion-bienvenida img {
+    width: 100%;
+  }
+
+  .bienvenida-texto h2 {
+    font-size: 1.3em;
+  }
+
+  /* TARJETAS DE ACCESO RÁPIDO */
+  .tarjetas {
+    gap: 10px;
+  }
+
+  .tarjeta {
+    min-width: 120px;
+    padding: 12px 10px;
+  }
+
+  /* DOS COLUMNAS — apila en móvil */
+  .dos-columnas {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* FRASE BLOQUE */
+  .frase-bloque {
+    padding: 16px 18px;
+  }
+
+  .frase-bloque p {
+    font-size: 0.95em;
+  }
+}
