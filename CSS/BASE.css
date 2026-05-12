@@ -93,7 +93,7 @@ nav ul li a.activo {
 /* MAIN — contenedor general */
 main {
   max-width: 960px;
-  margin: 32px auto;
+  margin: 0 auto 32px;
   background-color: white;
   padding: 36px 44px;
   border-radius: 8px;
