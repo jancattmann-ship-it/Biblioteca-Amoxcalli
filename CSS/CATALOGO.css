@@ -143,3 +143,59 @@
   object-fit: cover;
   border-radius: 5px;
 }
+
+/* FORMULARIO DE RESERVA */
+.card form {
+  margin-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 10px;
+}
+
+.reserva-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.reserva-cantidad label {
+  font-size: 0.78em;
+  color: #555;
+  font-weight: 600;
+}
+
+.reserva-cantidad input[type="number"] {
+  width: 55px;
+  padding: 4px 6px;
+  border: 1px solid #c8e6c9;
+  border-radius: 5px;
+  font-size: 0.82em;
+  color: #1a3e1f;
+  text-align: center;
+}
+
+.disponibilidad {
+  font-size: 0.75em;
+  color: #777;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.btn-reservar {
+  width: 100%;
+  padding: 8px 0;
+  background-color: #C9A96E;
+  color: #1a3e1f;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.82em;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-reservar:hover {
+  background-color: #b8914d;
+  color: #ffffff;
+}
