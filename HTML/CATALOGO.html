@@ -51,7 +51,19 @@
         <span class="leyenda historia">Historia y Cultura</span>
       </div>
     </div>
+
+    <div class="buscador-wrap">
+      <input type="text" id="buscador" placeholder="Buscar libro..." oninput="filtrar()">
+      <select id="filtro-genero" onchange="filtrar()">
+        <option value="todos">Todos los géneros</option>
+        <option value="politica">Política y Sociedad</option>
+        <option value="literatura">Literatura y Arte</option>
+        <option value="educacion">Educación y Ciencia</option>
+        <option value="economia">Economía y Desarrollo</option>
+        <option value="historia">Historia y Cultura</option>
+      </select>
     </div>
+
     <div class="banner-nuevos">
       Nuevas Adquisiciones — Mayo 2026
     </div>
