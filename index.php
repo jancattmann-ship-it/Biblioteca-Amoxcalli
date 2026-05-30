@@ -1,6 +1,5 @@
 <?php
 session_start();
-include_once("PHP/SESION.php");
 include_once("PHP/CONTADOR.php");
 ?>
 <!DOCTYPE html>
@@ -28,18 +27,6 @@ include_once("PHP/CONTADOR.php");
       <h1>Biblioteca Amoxcalli</h1>
       <p>Tu biblioteca de confianza</p>
     </div>
-    <!-- BOTÓN CUENTA -->
-    <div class="header-login">
-      <?php if (isset($_SESSION["usuario_activo"])): ?>
-        <img src="IMAGENES/cuenta.png" alt="Cuenta" class="icono-cuenta">
-        <a href="HTML/LOGIN.php" class="btn-header-login">
-          <?php echo htmlspecialchars($_SESSION["usuario_activo"]["nombre"]); ?>
-        </a>
-      <?php else: ?>
-        <img src="IMAGENES/cuenta.png" alt="Cuenta" class="icono-cuenta">
-        <a href="HTML/LOGIN.php" class="btn-header-login">Iniciar sesión</a>
-      <?php endif; ?>
-    </div>
   </header>
 
   <nav> <!-- MENU -->
@@ -51,7 +38,6 @@ include_once("PHP/CONTADOR.php");
       <li><a href="HTML/HORARIO.html">Horario</a></li>
       <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
       <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
-      <li><a href="HTML/LOGIN.php">Cuenta</a></li>
       <li><a href="HTML/UBICACION.html">Ubicación</a></li>
       <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
     </ul>
@@ -227,7 +213,6 @@ include_once("PHP/CONTADOR.php");
           <li><a href="HTML/HORARIO.html">Horario</a></li>
           <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
           <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
-          <li><a href="HTML/LOGIN.php">Cuenta</a></li>
           <li><a href="HTML/UBICACION.html">Ubicación</a></li>
           <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
         </ul>
