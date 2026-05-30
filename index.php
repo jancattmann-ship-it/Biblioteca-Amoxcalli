@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once("PHP/SESION.php");
+include_once("PHP/CONTADOR.php");
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,29 +21,49 @@
     <p> La página que estas viendo requiere para su funcionamiento el uso de JavaScript, si lo has desactivado
       intencionalmente, por favor vuelve a activarlo </p>
   </noscript>
+
   <header>
     <img src="IMAGENES/logo-temixco.png" alt="Logo Temixco">
     <div>
       <h1>Biblioteca Amoxcalli</h1>
       <p>Tu biblioteca de confianza</p>
     </div>
+    <!-- BOTÓN CUENTA -->
+    <div class="header-login">
+      <?php if (isset($_SESSION["usuario_activo"])): ?>
+        <img src="IMAGENES/cuenta.png" alt="Cuenta" class="icono-cuenta">
+        <a href="HTML/LOGIN.php" class="btn-header-login">
+          <?php echo htmlspecialchars($_SESSION["usuario_activo"]["nombre"]); ?>
+        </a>
+      <?php else: ?>
+        <img src="IMAGENES/cuenta.png" alt="Cuenta" class="icono-cuenta">
+        <a href="HTML/LOGIN.php" class="btn-header-login">Iniciar sesión</a>
+      <?php endif; ?>
+    </div>
   </header>
 
   <nav> <!-- MENU -->
     <ul>
-      <li><a href="index.html" class="activo">Inicio</a></li>
+      <li><a href="index.php" class="activo">Inicio</a></li>
       <li><a href="HTML/MISION.html">Misión y Visión</a></li>
       <li><a href="HTML/TEMPORADA.html">Talleres de Temporada </a></li>
       <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
       <li><a href="HTML/HORARIO.html">Horario</a></li>
       <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
       <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
+      <li><a href="HTML/LOGIN.php">Cuenta</a></li>
       <li><a href="HTML/UBICACION.html">Ubicación</a></li>
       <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
     </ul>
   </nav>
 
   <main>
+    <!-- CONTADOR Y FRASE ALEATORIA -->
+    <div class="bloque-bienvenida-contador">
+      <p class="contador-visitas"><?php echo $mensaje_visitas; ?></p>
+      <p class="frase-aleatoria"><?php echo $frase_del_dia; ?></p>
+    </div>
+
     <div class="seccion-bienvenida"> <!-- BIENVENIDA -->
       <div class="bienvenida-texto">
         <h2>Bienvenido a la Biblioteca Amoxcalli</h2>
@@ -84,18 +109,9 @@
         <h3>Horario de atención</h3>
         <table>
           <tbody>
-            <tr>
-              <td>Lunes a viernes</td>
-              <td>8:00 a.m. – 7:00 p.m.</td>
-            </tr>
-            <tr>
-              <td>Sábado</td>
-              <td>9:00 a.m. – 1:00 p.m.</td>
-            </tr>
-            <tr>
-              <td>Domingo</td>
-              <td>Cerrado</td>
-            </tr>
+            <tr><td>Lunes a viernes</td><td>8:00 a.m. – 7:00 p.m.</td></tr>
+            <tr><td>Sábado</td><td>9:00 a.m. – 1:00 p.m.</td></tr>
+            <tr><td>Domingo</td><td>Cerrado</td></tr>
           </tbody>
         </table>
       </div>
@@ -111,126 +127,123 @@
       </div>
     </div>
 
-    <div class="formulario-seccion"> <!-- AQUI EMPIEZA FORMULARIO -->
+    <!-- FORMULARIO DE REGISTRO -->
+    <div class="formulario-seccion" id="registro">
       <div class="formulario-titulo">
-        <h3>Reserva una visita guiada</h3>
-        <p>
-          Si deseas programar una visita guiada, puedes registrarte aqui para solicitar tu visita
-        </p>
+        <h3>Crear una cuenta</h3>
+        <p>Regístrate para acceder a todos los servicios de la biblioteca.</p>
       </div>
 
-      <form action="PHP/REGISTRO.php" method="post" class="formulario-credencial">
+      <?php if ($exito_registro !== ""): ?>
+        <p class="mensaje-exito"><?php echo $exito_registro; ?></p>
+      <?php endif; ?>
+      <?php if ($error_registro !== ""): ?>
+        <p class="mensaje-error"><?php echo $error_registro; ?></p>
+      <?php endif; ?>
 
-        <div class="campo">
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Bodoque" required>
-        </div>
+      <?php if (!isset($_SESSION["usuario_activo"])): ?>
+        <form method="POST" action="index.php#registro" class="formulario-credencial">
 
-        <div class="campo">
-          <label for="email">Correo electrónico</label>
-          <input type="email" id="email" name="email" placeholder="Ej. correo@ejemplo.com" required>
-        </div>
+          <div class="campo">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Bodoque" required>
+          </div>
 
-        <div class="campo">
-          <label for="telefono">Número de teléfono</label>
-          <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7771234567" pattern="[0-9]{10}"
-            maxlength="10" required>
-        </div>
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="Ej. correo@ejemplo.com" required>
+          </div>
 
-        <div class="campo">
-          <label for="date">Fecha de nacimiento</label>
-          <input type="date" id="date" name="date" placeholder="Fecha de nacimiento" value="2026-05-05" min="1900-01-01"
-            max="2026-05-05" required>
-        </div>
+          <div class="campo">
+            <label for="telefono">Número de teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7771234567"
+              pattern="[0-9]{10}" maxlength="10" required>
+          </div>
 
-        <div class="campo">
-          <label>Género</label>
-          <div class="radio-grupo">
-            <label class="radio-opcion">
-              <input type="radio" name="genero" id="genero" value="masculino" required checked="checked"> Masculino
-            </label>
-            <label class="radio-opcion">
-              <input type="radio" name="genero" id="genero" value="femenino"> Femenino
+          <div class="campo">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password"
+              placeholder="Mínimo 6 caracteres" required>
+          </div>
+
+          <div class="campo">
+            <label>Género</label>
+            <div class="radio-grupo">
+              <label class="radio-opcion">
+                <input type="radio" name="genero" value="masculino" required checked> Masculino
+              </label>
+              <label class="radio-opcion">
+                <input type="radio" name="genero" value="femenino"> Femenino
+              </label>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label class="checkbox-opcion">
+              <input type="checkbox" name="terminos" id="terminos" required>
+              Acepto los términos y políticas de privacidad
             </label>
           </div>
-        </div>
 
-        <div class="campo">
-          <label class="checkbox-opcion">
-            <input type="checkbox" name="terminos" id="terminos" required>
-            Acepto los términos y políticas de privacidad
-          </label>
-        </div>
+          <input type="submit" name="registrar" value="Crear cuenta">
+          <input type="reset" name="limpiar" value="Borrar datos">
 
-        <input type="submit" name="enviar" value="Guardar">
-        <input type="reset" name="limpiar" value="Borrar datos">
+        </form>
 
-      </form>
+        <p class="texto-registro">¿Ya tienes cuenta? <a href="HTML/LOGIN.php">Inicia sesión aquí</a>.</p>
+
+      <?php else: ?>
+        <p>Ya tienes sesión iniciada como <strong><?php echo htmlspecialchars($_SESSION["usuario_activo"]["nombre"]); ?></strong>.
+          <a href="HTML/LOGIN.php">Ir a mi cuenta</a>.
+        </p>
+      <?php endif; ?>
+
     </div>
 
   </main>
 
   <footer>
-
-    <!-- REDES SOCIALES -->
     <div class="footer-redes">
       <p>Síguenos en nuestras redes sociales</p>
       <div class="footer-redes-links">
-        <a href="https://www.facebook.com/AyuntamientodeTemixco/"><img src="IMAGENES/Facebook.png" alt="Facebook">
-          Facebook</a>
-        <a href="https://www.instagram.com/ayuntamientodetemixco/"><img src="IMAGENES/Instagram.png" alt="Instagram">
-          Instagram</a>
-        <a href="https://www.threads.net/@ayuntamientodetemixco?xmt=AQGziTwa__iNhTN6HzJ7QUfuMemPmw3gtZIfNjpT2JE6Mw"><img
-            src="IMAGENES/Threads.png" alt="Threads"> Threads</a>
+        <a href="https://www.facebook.com/AyuntamientodeTemixco/"><img src="IMAGENES/Facebook.png" alt="Facebook"> Facebook</a>
+        <a href="https://www.instagram.com/ayuntamientodetemixco/"><img src="IMAGENES/Instagram.png" alt="Instagram"> Instagram</a>
+        <a href="https://www.threads.net/@ayuntamientodetemixco?xmt=AQGziTwa__iNhTN6HzJ7QUfuMemPmw3gtZIfNjpT2JE6Mw"><img src="IMAGENES/Threads.png" alt="Threads"> Threads</a>
         <a href="https://x.com/AdeTemixco2527"><img src="IMAGENES/Twitter.png" alt="X"> Twitter</a>
       </div>
     </div>
-
-    <!-- CUERPO: 3 columnas -->
     <div class="footer-cuerpo">
-
-      <!-- COLUMNA 1: Logo y descripción -->
       <div class="footer-col footer-logo">
         <img src="IMAGENES/Logo_god.png" alt="Logo Temixco">
-        <p>Gobierno Municipal de Temixco, Morelos. Trabajando por un futuro próspero y seguro para nuestra comunidad.
-        </p>
+        <p>Gobierno Municipal de Temixco, Morelos. Trabajando por un futuro próspero y seguro para nuestra comunidad.</p>
       </div>
-
-      <!-- COLUMNA 2: Navegación rápida -->
       <div class="footer-col">
         <h4>Navegación</h4>
         <ul>
-          <li><a href="index.html" class="activo">Inicio</a></li>
+          <li><a href="index.php" class="activo">Inicio</a></li>
           <li><a href="HTML/MISION.html">Misión y Visión</a></li>
-          <li><a href="HTML/TEMPORADA.html">Talleres de Temporada </a></li>
+          <li><a href="HTML/TEMPORADA.html">Talleres de Temporada</a></li>
           <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
           <li><a href="HTML/HORARIO.html">Horario</a></li>
           <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
           <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
+          <li><a href="HTML/LOGIN.php">Cuenta</a></li>
           <li><a href="HTML/UBICACION.html">Ubicación</a></li>
           <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
         </ul>
       </div>
-
-      <!-- COLUMNA 3: Contacto -->
       <div class="footer-col">
         <h4>Contacto</h4>
-        <p>Av. Miguel Hidalgo y Costilla #20<br>
-          Pueblo, Temixco, Morelos C.P. 62580</p>
+        <p>Av. Miguel Hidalgo y Costilla #20<br>Pueblo, Temixco, Morelos C.P. 62580</p>
         <p>Tel: 55 4104 9360</p>
         <p>amoxcallip.viejo@gmail.com</p>
         <p>Lun–Vie 8:00am–8:00pm<br>Sáb 9:00am–1:00pm</p>
       </div>
-
     </div>
-
-    <!-- CRÉDITOS -->
     <div class="footer-creditos">
       <p>&copy; 2026 H. Ayuntamiento de Temixco. Todos los derechos reservados.</p>
     </div>
-
   </footer>
 
 </body>
-
 </html>

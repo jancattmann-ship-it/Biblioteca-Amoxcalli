@@ -1,0 +1,154 @@
+/*
+  LOGIN.CSS
+  Requiere: BASE.css cargado antes.
+*/
+
+/* PÁRRAFOS */
+main p {
+    line-height: 1.75;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+/* PANEL ADMIN */
+.panel-admin {
+    background-color: #fff8e1;
+    border-left: 5px solid #C9A96E;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+}
+
+.badge-admin {
+    display: inline-block;
+    background-color: #1a3e1f;
+    color: #C9A96E;
+    font-size: 0.78em;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* PANEL USUARIO NORMAL */
+.panel-usuario {
+    background-color: #f5faf5;
+    border-left: 5px solid #2e6b35;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+}
+
+/* TARJETA DE PERFIL */
+.tarjeta-perfil {
+    margin-bottom: 24px;
+}
+
+/* BOTÓN CERRAR SESIÓN */
+.btn-cerrar-sesion {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: #b71c1c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.95em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 20px;
+}
+
+.btn-cerrar-sesion:hover {
+    background-color: #c62828;
+}
+
+/* ENLACE A REGISTRO */
+.texto-registro {
+    margin-top: 16px;
+    font-size: 0.9em;
+    color: #555;
+    text-align: center;
+}
+
+.texto-registro a {
+    color: #2e6b35;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.texto-registro a:hover {
+    text-decoration: underline;
+}
+
+/* MENSAJES */
+.mensaje-error {
+    background-color: #ffebee;
+    border-left: 4px solid #b71c1c;
+    color: #b71c1c;
+    padding: 10px 14px;
+    border-radius: 5px;
+    font-size: 0.92em;
+    margin-bottom: 16px;
+}
+
+/* CAMPOS DEL FORMULARIO (heredados de index.css, repetidos aquí por independencia) */
+.formulario-credencial {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #1a3e1f;
+}
+
+.campo input[type="email"],
+.campo input[type="password"] {
+    padding: 9px 13px;
+    border: 1px solid #c8e6c9;
+    border-radius: 5px;
+    font-size: 0.95em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+    background-color: #f9fdf9;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input[type="email"]:focus,
+.campo input[type="password"]:focus {
+    border-color: #2e6b35;
+    box-shadow: 0 0 0 3px rgba(46, 107, 53, 0.1);
+    background-color: #fff;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 11px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    font-size: 1em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #1a3e1f;
+    color: #ffffff;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+input[type="submit"]:hover {
+    background-color: #2e6b35;
+    border-color: #C9A96E;
+}
