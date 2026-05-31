@@ -35,21 +35,16 @@ include_once("PHP/CONTADOR.php");
       <li><a href="HTML/MISION.html">Misión y Visión</a></li>
       <li><a href="HTML/TEMPORADA.html">Talleres de Temporada </a></li>
       <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
-      <li><a href="HTML/HORARIO.html">Horario</a></li>
       <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
+      <li><a href="HTML/HORARIO.html">Horario</a></li>
       <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
+      <li><a href="PHP/LOGIN.php">Cuenta</a></li>
       <li><a href="HTML/UBICACION.html">Ubicación</a></li>
       <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
     </ul>
   </nav>
 
   <main>
-    <!-- CONTADOR Y FRASE ALEATORIA -->
-    <div class="bloque-bienvenida-contador">
-      <p class="contador-visitas"><?php echo $mensaje_visitas; ?></p>
-      <p class="frase-aleatoria"><?php echo $frase_del_dia; ?></p>
-    </div>
-
     <div class="seccion-bienvenida"> <!-- BIENVENIDA -->
       <div class="bienvenida-texto">
         <h2>Bienvenido a la Biblioteca Amoxcalli</h2>
@@ -60,6 +55,11 @@ include_once("PHP/CONTADOR.php");
         <p class="frase-inst">"Un gobierno cercano a la gente"</p>
       </div>
       <img src="IMAGENES/Amoxcalli.jpg" alt="Fachada Biblioteca Amoxcalli">
+    </div>
+    <!-- CONTADOR Y FRASE ALEATORIA -->
+    <div class="bloque-bienvenida-contador">
+      <p class="contador-visitas"><?php echo $mensaje_visitas; ?></p>
+      <p class="frase-aleatoria"><?php echo $frase_del_dia; ?></p>
     </div>
 
     <h3>¿Qué deseas hacer?</h3>
@@ -87,7 +87,8 @@ include_once("PHP/CONTADOR.php");
     </div>
 
     <div class="frase-bloque"> <!-- FRASE -->
-      <p>"Somos una red de apoyo para esta comunidad donde la convivencia sana y la integración familiar es lo principal."</p>
+      <p>"Somos una red de apoyo para esta comunidad donde la convivencia sana y la integración familiar es lo
+        principal."</p>
     </div>
 
     <div class="dos-columnas">
@@ -95,9 +96,18 @@ include_once("PHP/CONTADOR.php");
         <h3>Horario de atención</h3>
         <table>
           <tbody>
-            <tr><td>Lunes a viernes</td><td>8:00 a.m. – 7:00 p.m.</td></tr>
-            <tr><td>Sábado</td><td>9:00 a.m. – 1:00 p.m.</td></tr>
-            <tr><td>Domingo</td><td>Cerrado</td></tr>
+            <tr>
+              <td>Lunes a viernes</td>
+              <td>8:00 a.m. – 7:00 p.m.</td>
+            </tr>
+            <tr>
+              <td>Sábado</td>
+              <td>9:00 a.m. – 1:00 p.m.</td>
+            </tr>
+            <tr>
+              <td>Domingo</td>
+              <td>Cerrado</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -113,77 +123,74 @@ include_once("PHP/CONTADOR.php");
       </div>
     </div>
 
-    <!-- FORMULARIO DE REGISTRO -->
-    <div class="formulario-seccion" id="registro">
+    <div class="formulario-seccion"> <!-- AQUI EMPIEZA FORMULARIO -->
       <div class="formulario-titulo">
-        <h3>Crear una cuenta</h3>
-        <p>Regístrate para acceder a todos los servicios de la biblioteca.</p>
+        <h3>Iniciar sesión</h3>
+        <p>
+          Si deseas poder ver el historial de los libros leidos entre otras cosas, puedes Iniciar sesion aqui.
+        </p>
       </div>
 
-      <?php if ($exito_registro !== ""): ?>
-        <p class="mensaje-exito"><?php echo $exito_registro; ?></p>
-      <?php endif; ?>
-      <?php if ($error_registro !== ""): ?>
-        <p class="mensaje-error"><?php echo $error_registro; ?></p>
-      <?php endif; ?>
+      <form action="PHP/REGISTRO.php" method="post" class="formulario-credencial">
 
-      <?php if (!isset($_SESSION["usuario_activo"])): ?>
-        <form method="POST" action="index.php#registro" class="formulario-credencial">
+        <div class="campo">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Bodoque" required>
+        </div>
 
-          <div class="campo">
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Bodoque" required>
-          </div>
+        <div class="campo">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="Ej. correo@ejemplo.com" required>
+        </div>
 
-          <div class="campo">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" placeholder="Ej. correo@ejemplo.com" required>
-          </div>
+        <div class="campo">
+          <label for="telefono">Número de teléfono</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7771234567" pattern="[0-9]{10}"
+            maxlength="10" required>
+        </div>
 
-          <div class="campo">
-            <label for="telefono">Número de teléfono</label>
-            <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7771234567"
-              pattern="[0-9]{10}" maxlength="10" required>
-          </div>
+        <div class="campo">
+          <label for="date">Fecha de nacimiento</label>
+          <input type="date" id="date" name="date" placeholder="Fecha de nacimiento" value="2026-05-05" min="1900-01-01"
+            max="2026-05-05" required>
+        </div>
 
-          <div class="campo">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password"
-              placeholder="Mínimo 6 caracteres" required>
-          </div>
-
-          <div class="campo">
-            <label>Género</label>
-            <div class="radio-grupo">
-              <label class="radio-opcion">
-                <input type="radio" name="genero" value="masculino" required checked> Masculino
-              </label>
-              <label class="radio-opcion">
-                <input type="radio" name="genero" value="femenino"> Femenino
-              </label>
-            </div>
-          </div>
-
-          <div class="campo">
-            <label class="checkbox-opcion">
-              <input type="checkbox" name="terminos" id="terminos" required>
-              Acepto los términos y políticas de privacidad
+        <div class="campo">
+          <label>Género</label>
+          <div class="radio-grupo">
+            <label class="radio-opcion">
+              <input type="radio" name="genero" id="genero" value="masculino" required checked="checked"> Masculino
+            </label>
+            <label class="radio-opcion">
+              <input type="radio" name="genero" id="genero" value="femenino"> Femenino
             </label>
           </div>
+        </div>
 
-          <input type="submit" name="registrar" value="Crear cuenta">
-          <input type="reset" name="limpiar" value="Borrar datos">
+        <!-- TIPO DE USUARIOs -->
+        <div class="campo">
+          <label>Tipo de usuario</label>
+          <div class="radio-grupo">
+            <label class="radio-opcion">
+              <input type="radio" name="tipo" value="visitante" required checked> Visitante
+            </label>
+            <label class="radio-opcion">
+              <input type="radio" name="tipo" value="administrador"> Administrador
+            </label>
+          </div>
+        </div>
 
-        </form>
+        <div class="campo">
+          <label class="checkbox-opcion">
+            <input type="checkbox" name="terminos" id="terminos" required>
+            Acepto los términos y políticas de privacidad
+          </label>
+        </div>
 
-        <p class="texto-registro">¿Ya tienes cuenta? <a href="HTML/LOGIN.php">Inicia sesión aquí</a>.</p>
+        <input type="submit" name="enviar" value="Guardar">
+        <input type="reset" name="limpiar" value="Borrar datos">
 
-      <?php else: ?>
-        <p>Ya tienes sesión iniciada como <strong><?php echo htmlspecialchars($_SESSION["usuario_activo"]["nombre"]); ?></strong>.
-          <a href="HTML/LOGIN.php">Ir a mi cuenta</a>.
-        </p>
-      <?php endif; ?>
-
+      </form>
     </div>
 
   </main>
@@ -192,16 +199,20 @@ include_once("PHP/CONTADOR.php");
     <div class="footer-redes">
       <p>Síguenos en nuestras redes sociales</p>
       <div class="footer-redes-links">
-        <a href="https://www.facebook.com/AyuntamientodeTemixco/"><img src="IMAGENES/Facebook.png" alt="Facebook"> Facebook</a>
-        <a href="https://www.instagram.com/ayuntamientodetemixco/"><img src="IMAGENES/Instagram.png" alt="Instagram"> Instagram</a>
-        <a href="https://www.threads.net/@ayuntamientodetemixco?xmt=AQGziTwa__iNhTN6HzJ7QUfuMemPmw3gtZIfNjpT2JE6Mw"><img src="IMAGENES/Threads.png" alt="Threads"> Threads</a>
+        <a href="https://www.facebook.com/AyuntamientodeTemixco/"><img src="IMAGENES/Facebook.png" alt="Facebook">
+          Facebook</a>
+        <a href="https://www.instagram.com/ayuntamientodetemixco/"><img src="IMAGENES/Instagram.png" alt="Instagram">
+          Instagram</a>
+        <a href="https://www.threads.net/@ayuntamientodetemixco?xmt=AQGziTwa__iNhTN6HzJ7QUfuMemPmw3gtZIfNjpT2JE6Mw"><img
+            src="IMAGENES/Threads.png" alt="Threads"> Threads</a>
         <a href="https://x.com/AdeTemixco2527"><img src="IMAGENES/Twitter.png" alt="X"> Twitter</a>
       </div>
     </div>
     <div class="footer-cuerpo">
       <div class="footer-col footer-logo">
         <img src="IMAGENES/Logo_god.png" alt="Logo Temixco">
-        <p>Gobierno Municipal de Temixco, Morelos. Trabajando por un futuro próspero y seguro para nuestra comunidad.</p>
+        <p>Gobierno Municipal de Temixco, Morelos. Trabajando por un futuro próspero y seguro para nuestra comunidad.
+        </p>
       </div>
       <div class="footer-col">
         <h4>Navegación</h4>
@@ -231,4 +242,5 @@ include_once("PHP/CONTADOR.php");
   </footer>
 
 </body>
+
 </html>

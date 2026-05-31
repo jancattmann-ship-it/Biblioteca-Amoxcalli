@@ -57,8 +57,3 @@ if ($visitas === 1) {
                     }
 
 ?>
-
-<div class="bloque-bienvenida-contador">
-    <p class="contador-visitas"><?php echo $mensaje_visitas; ?></p>
-    <p class="frase-aleatoria"><?php echo $frase_del_dia; ?></p>
-</div>

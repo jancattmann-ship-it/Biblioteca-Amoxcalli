@@ -1,4 +1,18 @@
 <?php
+session_start();
+
+$_SESSION["usuario"] = [
+    "nombre"   => $_POST["nombre"],
+    "email"    => $_POST["email"],
+    "telefono" => $_POST["telefono"],
+    "genero"   => $_POST["genero"],
+    "terminos" => isset($_POST["terminos"]),
+    "tipo"     => $_POST["tipo"]
+];
+
+header("Location: LOGIN.php");
+exit();
+
 echo "<title>Credencial </title>";
 echo "<meta charset='UTF-8'>";
 echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
@@ -11,6 +25,7 @@ $email = $_POST["email"];
 $telefono = $_POST["telefono"];
 $date = $_POST["date"];
 $genero = $_POST["genero"];
+$tipo = $_POST["tipo"];
 $terminos = isset($_POST["terminos"]);
 
 echo "<body><div class='contenedor'> <div class='titulo-pagina'>
@@ -22,6 +37,13 @@ echo "Tú email es: " . $email . "<br><br>";
 echo "Tú número de teléfono es: " . $telefono . "<br><br>";
 echo "Tú fecha de nacimiento es: " . $date . "<br><br>";
 echo "Tú género es: " . $genero . "<br><br>";
+echo "Tipo de visita: " . $tipo . "<br><br>";
+
+if ($tipo === "administrador") {
+    echo "<p><strong>Acceso de administrador:</strong> Bienvenido al panel de gestión de la biblioteca.</p>";
+} else {
+    echo "<p><strong>Bienvenido visitante:</strong> Tu solicitud de sesion ha sido registrada.</p>";
+}
 echo "Términos aceptados: " . ($terminos ? 'si' : 'no') . "</main><br><br></div>";
 echo "<footer>
     <div class='footer-redes'>
@@ -48,7 +70,7 @@ echo "<footer>
     <div class='footer-col'>
         <h4>Navegación</h4>
         <ul>
-        <li><a href='../index.html'>Inicio</a></li>
+        <li><a href='../index.php'>Inicio</a></li>
         <li><a href='../HTML/MISION.html'>Misión y Visión</a></li>
         <li><a href='../HTML/TEMPORADA.html'>Talleres de Temporada</a></li>
         <li><a href='../HTML/CATALOGO.html'>Catálogo</a></li>
