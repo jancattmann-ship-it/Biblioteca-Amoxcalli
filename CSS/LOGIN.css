@@ -47,3 +47,19 @@
 .btn-cerrar-sesion:hover {
     background-color: #c62828;
 }
+
+/* La X roja */
+.no-disponible {
+    color: #b71c1c;
+    font-weight: 600;
+}
+/* Esto cambia el color de los links a verde, (creo) */
+main a {
+    color: #2e6b35;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+main a:hover {
+    text-decoration: underline;
+}

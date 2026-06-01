@@ -281,6 +281,7 @@ footer {
   gap: 36px;
   padding: 36px 60px;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .footer-redes-links a img {
@@ -331,6 +332,7 @@ footer {
   color: #e8f5e9;
   line-height: 1.7;
   max-width: 220px;
+  justify-content: center;
 }
 
 /* Línea de créditos */
@@ -405,6 +407,7 @@ noscript p {
     flex-direction: column;
     padding: 24px 20px;
     gap: 20px;
+    justify-content: center;
   }
 
   .footer-redes-links {
@@ -415,4 +418,38 @@ noscript p {
     padding: 6px 14px;
     font-size: 0.85em;
   }
+}
+/* BOTÓN CUENTA EN HEADER */
+.header-login {
+  margin-left: auto;
+  flex-direction: row;
+  align-items: center;
+}
+
+.btn-header-login {
+  color: #C9A96E;
+  text-decoration: none;
+  font-size: 0.88em;
+  font-weight: 600;
+  border: 1px solid #C9A96E;
+  padding: 5px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+
+}
+
+.btn-header-login:hover {
+  background-color: #C9A96E;
+  color: #1a3e1f;
+}
+
+.icono-cuenta {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 5px;
+  object-fit: contain;
 }

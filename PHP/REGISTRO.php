@@ -55,7 +55,7 @@ echo "<footer>
         Instagram</a>
         <a href='https://www.threads.net/@ayuntamientodetemixco?xmt=AQGziTwa__iNhTN6HzJ7QUfuMemPmw3gtZIfNjpT2JE6Mw'><img
         src='../IMAGENES/threads.png' alt='Threads'> Threads</a>
-        <a href='https://x.com/AdeTemixco2527'><img src='IMAGENES/Twitter.png' alt='X'> Twitter</a>
+        <a href='https://x.com/AdeTemixco2527'><img src='../IMAGENES/Twitter.png' alt='X'> Twitter</a>
     </div>
     </div>
     <!--3 COLUMNAS -->

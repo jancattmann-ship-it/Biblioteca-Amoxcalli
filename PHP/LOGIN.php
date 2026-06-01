@@ -21,6 +21,10 @@ session_start();
             <h1>Biblioteca Amoxcalli</h1>
             <p>Tu biblioteca de confianza</p>
         </div>
+        <div class="header-login">
+            <a href="PHP/LOGIN.php" class="btn-header-login">
+                <img src="../IMAGENES/libro_verde.png" alt="Cuenta" class="icono-cuenta"> Mi cuenta </a>
+        </div>
     </header>
 
     <nav>
@@ -46,7 +50,7 @@ session_start();
 
             <!-- PANEL SEGÚN USUARIO -->
             <div class="titulo-pagina">
-                <img src="../IMAGENES/Comando_Bloque.png" alt="Cuenta" class="icono-pagina">
+                <img src="../IMAGENES/libro_verde.png" alt="Cuenta" class="icono-pagina">
                 <h2>Mi cuenta</h2>
             </div>
 
@@ -54,7 +58,7 @@ session_start();
                 <div class="panel-admin">
                     <span class="badge-tipo">Administrador</span>
                     <p>Bienvenido al panel de administración, <strong>
-                            <?php echo htmlspecialchars($u["nombre"]); ?>
+                            <?php echo ($u["nombre"]); ?>
                         </strong>.
                         Desde aquí puedes gestionar los recursos de la biblioteca.</p>
                 </div>
@@ -62,7 +66,7 @@ session_start();
                 <div class="panel-visitante">
                     <span class="badge-tipo">Visitante</span>
                     <p>Hola, <strong>
-                            <?php echo htmlspecialchars($u["nombre"]); ?>
+                            <?php echo ($u["nombre"]); ?>
                         </strong>. Tu registro ha sido guardado correctamente.</p>
                 </div>
             <?php endif; ?>
@@ -73,25 +77,25 @@ session_start();
                     <tr>
                         <td><strong>Nombre</strong></td>
                         <td>
-                            <?php echo htmlspecialchars($u["nombre"]); ?>
+                            <?php echo ($u["nombre"]); ?>
                         </td>
                     </tr>
                     <tr>
                         <td><strong>Correo</strong></td>
                         <td>
-                            <?php echo htmlspecialchars($u["email"]); ?>
+                            <?php echo ($u["email"]); ?>
                         </td>
                     </tr>
                     <tr>
                         <td><strong>Teléfono</strong></td>
                         <td>
-                            <?php echo htmlspecialchars($u["telefono"]); ?>
+                            <?php echo ($u["telefono"]); ?>
                         </td>
                     </tr>
                     <tr>
                         <td><strong>Género</strong></td>
                         <td>
-                            <?php echo htmlspecialchars($u["genero"]); ?>
+                            <?php echo ($u["genero"]); ?>
                         </td>
                     </tr>
                     <tr>
@@ -103,7 +107,7 @@ session_start();
                     <tr>
                         <td><strong>Tipo de cuenta</strong></td>
                         <td>
-                            <?php echo htmlspecialchars($u["tipo"]); ?>
+                            <?php echo ($u["tipo"]); ?>
                         </td>
                     </tr>
                 </tbody>
@@ -124,7 +128,7 @@ session_start();
         <?php else: ?>
 
             <div class="titulo-pagina">
-                <img src="../IMAGENES/cuenta.png" alt="Sesión" class="icono-pagina">
+                <img src="../IMAGENES/Comando_Bloque.png" alt="Sesión" class="icono-pagina">
                 <h2>Iniciar sesión</h2>
             </div>
 
@@ -154,12 +158,12 @@ session_start();
                     </tr>
                     <tr>
                         <td>Apartar libros sin credencial</td>
-                        <td>✗</td>
+                        <td class="no-disponible">✗</td>
                         <td>✔</td>
                     </tr>
                     <tr>
                         <td>Panel de administración</td>
-                        <td>✗</td>
+                        <td class="no-disponible">✗</td>
                         <td>✔</td>
                     </tr>
                 </tbody>
@@ -199,7 +203,7 @@ session_start();
                     <li><a href="../HTML/CATALOGO.html">Catálogo</a></li>
                     <li><a href="../HTML/SERVICIOS.html">Servicios</a></li>
                     <li><a href="../HTML/CREDENCIAL.html">Credencial</a></li>
-                    <li><a href="LOGIN.php">Sesión</a></li>
+                    <li><a href="LOGIN.php">Cuenta</a></li>
                     <li><a href="../HTML/UBICACION.html">Ubicación</a></li>
                 </ul>
             </div>

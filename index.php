@@ -27,219 +27,222 @@ include_once("PHP/CONTADOR.php");
       <h1>Biblioteca Amoxcalli</h1>
       <p>Tu biblioteca de confianza</p>
     </div>
+    <div class="header-login">
+      <a href="PHP/LOGIN.php" class="btn-header-login">
+        <img src="IMAGENES/libro_verde.png" alt="Cuenta" class="icono-cuenta"> <?php echo isset($_SESSION["usuario"]) ? ($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?> </a>
+    </div>
   </header>
+    <nav> <!-- MENU -->
+      <ul>
+        <li><a href="index.php" class="activo">Inicio</a></li>
+        <li><a href="HTML/MISION.html">Misión y Visión</a></li>
+        <li><a href="HTML/TEMPORADA.html">Talleres de Temporada </a></li>
+        <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
+        <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
+        <li><a href="HTML/HORARIO.html">Horario</a></li>
+        <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
+        <li><a href="PHP/LOGIN.php">Cuenta</a></li>
+        <li><a href="HTML/UBICACION.html">Ubicación</a></li>
+        <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
+      </ul>
+    </nav>
 
-  <nav> <!-- MENU -->
-    <ul>
-      <li><a href="index.php" class="activo">Inicio</a></li>
-      <li><a href="HTML/MISION.html">Misión y Visión</a></li>
-      <li><a href="HTML/TEMPORADA.html">Talleres de Temporada </a></li>
-      <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
-      <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
-      <li><a href="HTML/HORARIO.html">Horario</a></li>
-      <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
-      <li><a href="PHP/LOGIN.php">Cuenta</a></li>
-      <li><a href="HTML/UBICACION.html">Ubicación</a></li>
-      <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
-    </ul>
-  </nav>
-
-  <main>
-    <div class="seccion-bienvenida"> <!-- BIENVENIDA -->
-      <div class="bienvenida-texto">
-        <h2>Bienvenido a la Biblioteca Amoxcalli</h2>
-        <p>
-          Somos una biblioteca pública al servicio de la comunidad de Temixco, Morelos.
-          Fomentamos la lectura, el aprendizaje y la convivencia sana entre familias.
-        </p>
-        <p class="frase-inst">"Un gobierno cercano a la gente"</p>
+    <main>
+      <div class="seccion-bienvenida"> <!-- BIENVENIDA -->
+        <div class="bienvenida-texto">
+          <h2>Bienvenido a la Biblioteca Amoxcalli</h2>
+          <p>
+            Somos una biblioteca pública al servicio de la comunidad de Temixco, Morelos.
+            Fomentamos la lectura, el aprendizaje y la convivencia sana entre familias.
+          </p>
+          <p class="frase-inst">"Un gobierno cercano a la gente"</p>
+        </div>
+        <img src="IMAGENES/Fachada_Biblioteca.jfif" alt="Fachada Biblioteca Amoxcalli">
       </div>
-      <img src="IMAGENES/Amoxcalli.jpg" alt="Fachada Biblioteca Amoxcalli">
-    </div>
-    <!-- CONTADOR Y FRASE ALEATORIA -->
-    <div class="bloque-bienvenida-contador">
-      <p class="contador-visitas"><?php echo $mensaje_visitas; ?></p>
-      <p class="frase-aleatoria"><?php echo $frase_del_dia; ?></p>
-    </div>
-
-    <h3>¿Qué deseas hacer?</h3>
-    <div class="tarjetas"> <!-- TARJETAS CON ICONOS -->
-      <a href="HTML/HORARIO.html" class="tarjeta">
-        <img src="IMAGENES/Reloj.gif" alt="Horario">
-        <p>Horario</p>
-        <small>Lun–Vie 8am–7pm</small>
-      </a>
-      <a href="HTML/SERVICIOS.html" class="tarjeta">
-        <img src="IMAGENES/cofre_ender.gif" alt="Servicios">
-        <p>Servicios</p>
-        <small>Ver todos</small>
-      </a>
-      <a href="HTML/CATALOGO.html" class="tarjeta">
-        <img src="IMAGENES/libro_Encantado.gif" alt="Catálogo">
-        <p>Catálogo</p>
-        <small>Ver libros</small>
-      </a>
-      <a href="HTML/UBICACION.html" class="tarjeta">
-        <img src="IMAGENES/Compas.gif" alt="Ubicación">
-        <p>Ubicación</p>
-        <small>Pueblo Viejo, Temixco</small>
-      </a>
-    </div>
-
-    <div class="frase-bloque"> <!-- FRASE -->
-      <p>"Somos una red de apoyo para esta comunidad donde la convivencia sana y la integración familiar es lo
-        principal."</p>
-    </div>
-
-    <div class="dos-columnas">
-      <div class="columna">
-        <h3>Horario de atención</h3>
-        <table>
-          <tbody>
-            <tr>
-              <td>Lunes a viernes</td>
-              <td>8:00 a.m. – 7:00 p.m.</td>
-            </tr>
-            <tr>
-              <td>Sábado</td>
-              <td>9:00 a.m. – 1:00 p.m.</td>
-            </tr>
-            <tr>
-              <td>Domingo</td>
-              <td>Cerrado</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="columna">
-        <h3>Algunos servicios</h3>
-        <ul>
-          <li>Consulta de libros gratuita</li>
-          <li>Préstamo de libros</li>
-          <li>Circulo de lectura</li>
-          <li>Cafecito Literario</li>
-          <li>Talleres didácticos</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="formulario-seccion"> <!-- AQUI EMPIEZA FORMULARIO -->
-      <div class="formulario-titulo">
-        <h3>Iniciar sesión</h3>
-        <p>
-          Si deseas poder ver el historial de los libros leidos entre otras cosas, puedes Iniciar sesion aqui.
-        </p>
+      <!-- CONTADOR Y FRASE ALEATORIA -->
+      <div class="bloque-bienvenida-contador">
+        <p class="contador-visitas"><?php echo $mensaje_visitas; ?></p>
+        <p class="frase-aleatoria"><?php echo $frase_del_dia; ?></p>
       </div>
 
-      <form action="PHP/REGISTRO.php" method="post" class="formulario-credencial">
+      <h3>¿Qué deseas hacer?</h3>
+      <div class="tarjetas"> <!-- TARJETAS CON ICONOS -->
+        <a href="HTML/HORARIO.html" class="tarjeta">
+          <img src="IMAGENES/Reloj.gif" alt="Horario">
+          <p>Horario</p>
+          <small>Lun–Vie 8am–7pm</small>
+        </a>
+        <a href="HTML/SERVICIOS.html" class="tarjeta">
+          <img src="IMAGENES/cofre_ender.gif" alt="Servicios">
+          <p>Servicios</p>
+          <small>Ver todos</small>
+        </a>
+        <a href="HTML/CATALOGO.html" class="tarjeta">
+          <img src="IMAGENES/libro_Encantado.gif" alt="Catálogo">
+          <p>Catálogo</p>
+          <small>Ver libros</small>
+        </a>
+        <a href="HTML/UBICACION.html" class="tarjeta">
+          <img src="IMAGENES/Compas.gif" alt="Ubicación">
+          <p>Ubicación</p>
+          <small>Pueblo Viejo, Temixco</small>
+        </a>
+      </div>
 
-        <div class="campo">
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Bodoque" required>
+      <div class="frase-bloque"> <!-- FRASE -->
+        <p>"Somos una red de apoyo para esta comunidad donde la convivencia sana y la integración familiar es lo
+          principal."</p>
+      </div>
+
+      <div class="dos-columnas">
+        <div class="columna">
+          <h3>Horario de atención</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td>Lunes a viernes</td>
+                <td>8:00 a.m. – 7:00 p.m.</td>
+              </tr>
+              <tr>
+                <td>Sábado</td>
+                <td>9:00 a.m. – 1:00 p.m.</td>
+              </tr>
+              <tr>
+                <td>Domingo</td>
+                <td>Cerrado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="columna">
+          <h3>Algunos servicios</h3>
+          <ul>
+            <li>Consulta de libros gratuita</li>
+            <li>Préstamo de libros</li>
+            <li>Circulo de lectura</li>
+            <li>Cafecito Literario</li>
+            <li>Talleres didácticos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="formulario-seccion"> <!-- AQUI EMPIEZA FORMULARIO -->
+        <div class="formulario-titulo">
+          <h3>Iniciar sesión</h3>
+          <p>
+            Si deseas poder ver el historial de los libros leidos entre otras cosas, puedes Iniciar sesion aqui.
+          </p>
         </div>
 
-        <div class="campo">
-          <label for="email">Correo electrónico</label>
-          <input type="email" id="email" name="email" placeholder="Ej. correo@ejemplo.com" required>
-        </div>
+        <form action="PHP/REGISTRO.php" method="post" class="formulario-credencial">
 
-        <div class="campo">
-          <label for="telefono">Número de teléfono</label>
-          <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7771234567" pattern="[0-9]{10}"
-            maxlength="10" required>
-        </div>
+          <div class="campo">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Bodoque" required>
+          </div>
 
-        <div class="campo">
-          <label for="date">Fecha de nacimiento</label>
-          <input type="date" id="date" name="date" placeholder="Fecha de nacimiento" value="2026-05-05" min="1900-01-01"
-            max="2026-05-05" required>
-        </div>
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="Ej. correo@ejemplo.com" required>
+          </div>
 
-        <div class="campo">
-          <label>Género</label>
-          <div class="radio-grupo">
-            <label class="radio-opcion">
-              <input type="radio" name="genero" id="genero" value="masculino" required checked="checked"> Masculino
-            </label>
-            <label class="radio-opcion">
-              <input type="radio" name="genero" id="genero" value="femenino"> Femenino
+          <div class="campo">
+            <label for="telefono">Número de teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7771234567" pattern="[0-9]{10}"
+              maxlength="10" required>
+          </div>
+
+          <div class="campo">
+            <label for="date">Fecha de nacimiento</label>
+            <input type="date" id="date" name="date" placeholder="Fecha de nacimiento" value="2026-05-05"
+              min="1900-01-01" max="2026-05-05" required>
+          </div>
+
+          <div class="campo">
+            <label>Género</label>
+            <div class="radio-grupo">
+              <label class="radio-opcion">
+                <input type="radio" name="genero" id="genero" value="masculino" required checked="checked"> Masculino
+              </label>
+              <label class="radio-opcion">
+                <input type="radio" name="genero" id="genero" value="femenino"> Femenino
+              </label>
+            </div>
+          </div>
+
+          <!-- TIPO DE USUARIOs -->
+          <div class="campo">
+            <label>Tipo de usuario</label>
+            <div class="radio-grupo">
+              <label class="radio-opcion">
+                <input type="radio" name="tipo" value="visitante" required checked> Visitante
+              </label>
+              <label class="radio-opcion">
+                <input type="radio" name="tipo" value="administrador"> Administrador
+              </label>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label class="checkbox-opcion">
+              <input type="checkbox" name="terminos" id="terminos" required>
+              Acepto los términos y políticas de privacidad
             </label>
           </div>
+
+          <input type="submit" name="enviar" value="Guardar">
+          <input type="reset" name="limpiar" value="Borrar datos">
+
+        </form>
+      </div>
+
+    </main>
+
+    <footer>
+      <div class="footer-redes">
+        <p>Síguenos en nuestras redes sociales</p>
+        <div class="footer-redes-links">
+          <a href="https://www.facebook.com/AyuntamientodeTemixco/"><img src="IMAGENES/Facebook.png" alt="Facebook">
+            Facebook</a>
+          <a href="https://www.instagram.com/ayuntamientodetemixco/"><img src="IMAGENES/Instagram.png" alt="Instagram">
+            Instagram</a>
+          <a href="https://www.threads.net/@ayuntamientodetemixco?xmt=AQGziTwa__iNhTN6HzJ7QUfuMemPmw3gtZIfNjpT2JE6Mw"><img
+              src="IMAGENES/Threads.png" alt="Threads"> Threads</a>
+          <a href="https://x.com/AdeTemixco2527"><img src="IMAGENES/Twitter.png" alt="X"> Twitter</a>
         </div>
-
-        <!-- TIPO DE USUARIOs -->
-        <div class="campo">
-          <label>Tipo de usuario</label>
-          <div class="radio-grupo">
-            <label class="radio-opcion">
-              <input type="radio" name="tipo" value="visitante" required checked> Visitante
-            </label>
-            <label class="radio-opcion">
-              <input type="radio" name="tipo" value="administrador"> Administrador
-            </label>
-          </div>
+      </div>
+      <div class="footer-cuerpo">
+        <div class="footer-col footer-logo">
+          <img src="IMAGENES/Logo_god.png" alt="Logo Temixco">
+          <p>Gobierno Municipal de Temixco, Morelos. Trabajando por un futuro próspero y seguro para nuestra comunidad.
+          </p>
         </div>
-
-        <div class="campo">
-          <label class="checkbox-opcion">
-            <input type="checkbox" name="terminos" id="terminos" required>
-            Acepto los términos y políticas de privacidad
-          </label>
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.php" class="activo">Inicio</a></li>
+            <li><a href="HTML/MISION.html">Misión y Visión</a></li>
+            <li><a href="HTML/TEMPORADA.html">Talleres de Temporada</a></li>
+            <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
+            <li><a href="HTML/HORARIO.html">Horario</a></li>
+            <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
+            <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
+            <li><a href="HTML/UBICACION.html">Ubicación</a></li>
+            <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
+          </ul>
         </div>
-
-        <input type="submit" name="enviar" value="Guardar">
-        <input type="reset" name="limpiar" value="Borrar datos">
-
-      </form>
-    </div>
-
-  </main>
-
-  <footer>
-    <div class="footer-redes">
-      <p>Síguenos en nuestras redes sociales</p>
-      <div class="footer-redes-links">
-        <a href="https://www.facebook.com/AyuntamientodeTemixco/"><img src="IMAGENES/Facebook.png" alt="Facebook">
-          Facebook</a>
-        <a href="https://www.instagram.com/ayuntamientodetemixco/"><img src="IMAGENES/Instagram.png" alt="Instagram">
-          Instagram</a>
-        <a href="https://www.threads.net/@ayuntamientodetemixco?xmt=AQGziTwa__iNhTN6HzJ7QUfuMemPmw3gtZIfNjpT2JE6Mw"><img
-            src="IMAGENES/Threads.png" alt="Threads"> Threads</a>
-        <a href="https://x.com/AdeTemixco2527"><img src="IMAGENES/Twitter.png" alt="X"> Twitter</a>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <p>Av. Miguel Hidalgo y Costilla #20<br>Pueblo, Temixco, Morelos C.P. 62580</p>
+          <p>Tel: 55 4104 9360</p>
+          <p>amoxcallip.viejo@gmail.com</p>
+          <p>Lun–Vie 8:00am–8:00pm<br>Sáb 9:00am–1:00pm</p>
+        </div>
       </div>
-    </div>
-    <div class="footer-cuerpo">
-      <div class="footer-col footer-logo">
-        <img src="IMAGENES/Logo_god.png" alt="Logo Temixco">
-        <p>Gobierno Municipal de Temixco, Morelos. Trabajando por un futuro próspero y seguro para nuestra comunidad.
-        </p>
+      <div class="footer-creditos">
+        <p>&copy; 2026 H. Ayuntamiento de Temixco. Todos los derechos reservados.</p>
       </div>
-      <div class="footer-col">
-        <h4>Navegación</h4>
-        <ul>
-          <li><a href="index.php" class="activo">Inicio</a></li>
-          <li><a href="HTML/MISION.html">Misión y Visión</a></li>
-          <li><a href="HTML/TEMPORADA.html">Talleres de Temporada</a></li>
-          <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
-          <li><a href="HTML/HORARIO.html">Horario</a></li>
-          <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
-          <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
-          <li><a href="HTML/UBICACION.html">Ubicación</a></li>
-          <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contacto</h4>
-        <p>Av. Miguel Hidalgo y Costilla #20<br>Pueblo, Temixco, Morelos C.P. 62580</p>
-        <p>Tel: 55 4104 9360</p>
-        <p>amoxcallip.viejo@gmail.com</p>
-        <p>Lun–Vie 8:00am–8:00pm<br>Sáb 9:00am–1:00pm</p>
-      </div>
-    </div>
-    <div class="footer-creditos">
-      <p>&copy; 2026 H. Ayuntamiento de Temixco. Todos los derechos reservados.</p>
-    </div>
-  </footer>
+    </footer>
 
 </body>
 
