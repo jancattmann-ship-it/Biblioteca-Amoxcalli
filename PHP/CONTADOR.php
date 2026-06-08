@@ -53,7 +53,7 @@ if ($visitas === 1) {
                 if ($visitas <= 80) {
                     $mensaje_visitas = "¿¡<strong>$visitas</strong> visitas!?. A estas alturas ya deberías tener tu credencial (porfa)";
                     } else {
-                        $mensaje_visitas = "¿¡¡<strong>$visitas</strong> visitas!!?. Oficialmente haz ido mas veces que, envidia ~Jan";
+                        $mensaje_visitas = "¿¡¡<strong>$visitas</strong> visitas!!?. Oficialmente haz ido mas veces que envidia ~Jan";
                     }
 
 ?>

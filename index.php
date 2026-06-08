@@ -37,7 +37,7 @@ include_once("PHP/CONTADOR.php");
         <li><a href="index.php" class="activo">Inicio</a></li>
         <li><a href="HTML/MISION.html">Misión y Visión</a></li>
         <li><a href="HTML/TEMPORADA.html">Talleres de Temporada </a></li>
-        <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
+        <li><a href="PHP/CATALOGO.php">Catálogo</a></li>
         <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
         <li><a href="HTML/HORARIO.html">Horario</a></li>
         <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
@@ -77,7 +77,7 @@ include_once("PHP/CONTADOR.php");
           <p>Servicios</p>
           <small>Ver todos</small>
         </a>
-        <a href="HTML/CATALOGO.html" class="tarjeta">
+        <a href="PHP/CATALOGO.php" class="tarjeta">
           <img src="IMAGENES/libro_Encantado.gif" alt="Catálogo">
           <p>Catálogo</p>
           <small>Ver libros</small>
@@ -126,76 +126,6 @@ include_once("PHP/CONTADOR.php");
         </div>
       </div>
 
-      <div class="formulario-seccion"> <!-- AQUI EMPIEZA FORMULARIO -->
-        <div class="formulario-titulo">
-          <h3>Iniciar sesión</h3>
-          <p>
-            Si deseas poder ver el historial de los libros leidos entre otras cosas, puedes Iniciar sesion aqui.
-          </p>
-        </div>
-
-        <form action="PHP/REGISTRO.php" method="post" class="formulario-credencial">
-
-          <div class="campo">
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Bodoque" required>
-          </div>
-
-          <div class="campo">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" placeholder="Ej. correo@ejemplo.com" required>
-          </div>
-
-          <div class="campo">
-            <label for="telefono">Número de teléfono</label>
-            <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7771234567" pattern="[0-9]{10}"
-              maxlength="10" required>
-          </div>
-
-          <div class="campo">
-            <label for="date">Fecha de nacimiento</label>
-            <input type="date" id="date" name="date" placeholder="Fecha de nacimiento" value="2026-05-05"
-              min="1900-01-01" max="2026-05-05" required>
-          </div>
-
-          <div class="campo">
-            <label>Género</label>
-            <div class="radio-grupo">
-              <label class="radio-opcion">
-                <input type="radio" name="genero" id="genero" value="masculino" required checked="checked"> Masculino
-              </label>
-              <label class="radio-opcion">
-                <input type="radio" name="genero" id="genero" value="femenino"> Femenino
-              </label>
-            </div>
-          </div>
-
-          <!-- TIPO DE USUARIOs -->
-          <div class="campo">
-            <label>Tipo de usuario</label>
-            <div class="radio-grupo">
-              <label class="radio-opcion">
-                <input type="radio" name="tipo" value="visitante" required checked> Visitante
-              </label>
-              <label class="radio-opcion">
-                <input type="radio" name="tipo" value="administrador"> Administrador
-              </label>
-            </div>
-          </div>
-
-          <div class="campo">
-            <label class="checkbox-opcion">
-              <input type="checkbox" name="terminos" id="terminos" required>
-              Acepto los términos y políticas de privacidad
-            </label>
-          </div>
-
-          <input type="submit" name="enviar" value="Guardar">
-          <input type="reset" name="limpiar" value="Borrar datos">
-
-        </form>
-      </div>
-
     </main>
 
     <footer>
@@ -223,7 +153,7 @@ include_once("PHP/CONTADOR.php");
             <li><a href="index.php" class="activo">Inicio</a></li>
             <li><a href="HTML/MISION.html">Misión y Visión</a></li>
             <li><a href="HTML/TEMPORADA.html">Talleres de Temporada</a></li>
-            <li><a href="HTML/CATALOGO.html">Catálogo</a></li>
+            <li><a href="PHP/CATALOGO.php">Catálogo</a></li>
             <li><a href="HTML/HORARIO.html">Horario</a></li>
             <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
             <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>

@@ -1,5 +1,92 @@
 <?php
 session_start();
+include_once("CONEXION.php");
+
+// --- CERRAR SESIÓN ---
+if (isset($_POST["cerrar_sesion"])) {
+    session_destroy();
+    header("Location: LOGIN.php");
+    exit();
+}
+
+// --- ELIMINAR CUENTA ---
+if (isset($_POST["eliminar_cuenta"])) {
+    $email = $_SESSION["usuario"]["email"];
+    $stmt = mysqli_prepare($con, "DELETE FROM usuarios WHERE email = ?");
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    session_destroy();
+    header("Location: LOGIN.php?eliminado=ok");
+    exit();
+}
+
+// --- DEVOLVER LIBRO ---
+if (isset($_POST["devolver"])) {
+    $id_saca = $_POST["id_saca"];
+    $fecha_hoy = date("Y-m-d");
+    $stmt_dev = mysqli_prepare($con, "UPDATE saca SET fecha_devuelto = ? WHERE id = ? AND email = ?");
+    mysqli_stmt_bind_param($stmt_dev, "sis", $fecha_hoy, $id_saca, $_SESSION["usuario"]["email"]);
+    mysqli_stmt_execute($stmt_dev);
+    mysqli_stmt_close($stmt_dev);
+    header("Location: LOGIN.php");
+    exit();
+}
+
+// --- ACTUALIZAR DATOS ---
+$msg_update = "";
+if (isset($_POST["actualizar"])) {
+    $email = $_SESSION["usuario"]["email"];
+    $telefono = trim($_POST["telefono_nuevo"]);
+    $password = trim($_POST["password_nuevo"]);
+
+    if ($telefono !== "" && $password !== "") {
+        $stmt = mysqli_prepare($con, "UPDATE usuarios SET telefono = ?, contrasena = ? WHERE email = ?");
+        mysqli_stmt_bind_param($stmt, "sss", $telefono, $password, $email);
+    } elseif ($telefono !== "") {
+        $stmt = mysqli_prepare($con, "UPDATE usuarios SET telefono = ? WHERE email = ?");
+        mysqli_stmt_bind_param($stmt, "ss", $telefono, $email);
+    } elseif ($password !== "") {
+        $stmt = mysqli_prepare($con, "UPDATE usuarios SET contrasena = ? WHERE email = ?");
+        mysqli_stmt_bind_param($stmt, "ss", $password, $email);
+    } else {
+        $msg_update = "vacio";
+        $stmt = null;
+    }
+
+    if ($stmt) {
+        if (mysqli_stmt_execute($stmt)) {
+            if ($telefono !== "")
+                $_SESSION["usuario"]["telefono"] = $telefono;
+            $msg_update = "ok";
+        } else {
+            $msg_update = "error";
+        }
+        mysqli_stmt_close($stmt);
+    }
+}
+
+// --- INICIAR SESIÓN ---
+$error_login = "";
+if (isset($_POST["iniciar_sesion"])) {
+    $email = trim($_POST["email_login"]);
+    $password = $_POST["password_login"];
+
+    $stmt = mysqli_prepare($con, "SELECT nombre, email, telefono, genero, tipo FROM usuarios WHERE email = ? AND contrasena = ?");
+    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+
+    if ($fila = mysqli_fetch_assoc($resultado)) {
+        $_SESSION["usuario"] = $fila;
+        mysqli_stmt_close($stmt);
+        header("Location: LOGIN.php");
+        exit();
+    } else {
+        $error_login = "Correo o contraseña incorrectos.";
+    }
+    mysqli_stmt_close($stmt);
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,7 +110,10 @@ session_start();
         </div>
         <div class="header-login">
             <a href="PHP/LOGIN.php" class="btn-header-login">
-                <img src="../IMAGENES/libro_verde.png" alt="Cuenta" class="icono-cuenta"> Mi cuenta </a>
+                <img src="../IMAGENES/libro_verde.png" alt="Cuenta" class="icono-cuenta">
+                <?php echo isset($_SESSION["usuario"]) ? ($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?>
+            </a>
+        </div>
         </div>
     </header>
 
@@ -32,7 +122,7 @@ session_start();
             <li><a href="../index.php">Inicio</a></li>
             <li><a href="../HTML/MISION.html">Misión y Visión</a></li>
             <li><a href="../HTML/TEMPORADA.html">Talleres de Temporada</a></li>
-            <li><a href="../HTML/CATALOGO.html">Catálogo</a></li>
+            <li><a href="../PHP/CATALOGO.php">Catálogo</a></li>
             <li><a href="../HTML/SERVICIOS.html">Servicios</a></li>
             <li><a href="../HTML/HORARIO.html">Horario</a></li>
             <li><a href="../HTML/CREDENCIAL.html">Credencial</a></li>
@@ -48,7 +138,7 @@ session_start();
 
             <?php $u = $_SESSION["usuario"]; ?>
 
-            <!-- PANEL SEGÚN USUARIO -->
+            <!-- PANEL SEGÚN TIPO DE USUARIO -->
             <div class="titulo-pagina">
                 <img src="../IMAGENES/libro_verde.png" alt="Cuenta" class="icono-pagina">
                 <h2>Mi cuenta</h2>
@@ -57,85 +147,232 @@ session_start();
             <?php if ($u["tipo"] === "administrador"): ?>
                 <div class="panel-admin">
                     <span class="badge-tipo">Administrador</span>
-                    <p>Bienvenido al panel de administración, <strong>
-                            <?php echo ($u["nombre"]); ?>
-                        </strong>.
+                    <p>Bienvenido al panel de administración, <strong><?php echo ($u["nombre"]); ?></strong>.
                         Desde aquí puedes gestionar los recursos de la biblioteca.</p>
                 </div>
             <?php else: ?>
                 <div class="panel-visitante">
                     <span class="badge-tipo">Visitante</span>
-                    <p>Hola, <strong>
-                            <?php echo ($u["nombre"]); ?>
-                        </strong>. Tu registro ha sido guardado correctamente.</p>
+                    <p>Hola, <strong><?php echo ($u["nombre"]); ?></strong>. Tu registro ha sido guardado
+                        correctamente.</p>
                 </div>
             <?php endif; ?>
 
+            <!-- TABLA DE DATOS -->
             <h3>Tus datos registrados</h3>
             <table>
                 <tbody>
                     <tr>
                         <td><strong>Nombre</strong></td>
-                        <td>
-                            <?php echo ($u["nombre"]); ?>
-                        </td>
+                        <td><?php echo ($u["nombre"]); ?></td>
                     </tr>
                     <tr>
                         <td><strong>Correo</strong></td>
-                        <td>
-                            <?php echo ($u["email"]); ?>
-                        </td>
+                        <td><?php echo ($u["email"]); ?></td>
                     </tr>
                     <tr>
                         <td><strong>Teléfono</strong></td>
-                        <td>
-                            <?php echo ($u["telefono"]); ?>
-                        </td>
+                        <td><?php echo ($u["telefono"]); ?></td>
                     </tr>
                     <tr>
                         <td><strong>Género</strong></td>
-                        <td>
-                            <?php echo ($u["genero"]); ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Términos aceptados</strong></td>
-                        <td>
-                            <?php echo $u["terminos"] ? "Sí" : "No"; ?>
-                        </td>
+                        <td><?php echo ($u["genero"]); ?></td>
                     </tr>
                     <tr>
                         <td><strong>Tipo de cuenta</strong></td>
-                        <td>
-                            <?php echo ($u["tipo"]); ?>
-                        </td>
+                        <td><?php echo ($u["tipo"]); ?></td>
                     </tr>
                 </tbody>
             </table>
 
+            <!-- HISTORIAL DE PRÉSTAMOS -->
+            <h3>Mis libros apartados</h3>
             <?php
-            if (isset($_POST["cerrar_sesion"])) {
-                session_destroy();
-                header("Location: LOGIN.php");
-                exit();
-            }
-            ?>
+            $stmt_h = mysqli_prepare($con, "SELECT s.id, l.titulo, s.cod_libro, s.fecha_pedido, s.fecha_devuelto FROM saca s JOIN libros l ON s.cod_libro = l.cod_libro WHERE s.email = ? ORDER BY s.fecha_pedido DESC");
+            mysqli_stmt_bind_param($stmt_h, "s", $u["email"]);
+            mysqli_stmt_execute($stmt_h);
+            $resultado_h = mysqli_stmt_get_result($stmt_h);
 
-            <form method="POST">
-                <input type="submit" name="cerrar_sesion" value="Cerrar sesión" class="btn-cerrar-sesion">
-            </form>
+            if (mysqli_num_rows($resultado_h) > 0): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Código</th>
+                            <th>Fecha préstamo</th>
+                            <th>Fecha devolución</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($prestamo = mysqli_fetch_assoc($resultado_h)): ?>
+                            <tr>
+                                <td><?php echo ($prestamo["titulo"]); ?></td>
+                                <td><?php echo ($prestamo["cod_libro"]); ?></td>
+                                <td><?php echo date("d/m/Y", strtotime($prestamo["fecha_pedido"])); ?></td>
+                                <td><?php echo $prestamo["fecha_devuelto"] ? date("d/m/Y", strtotime($prestamo["fecha_devuelto"])) : "Pendiente"; ?>
+                                </td>
+                                <td>
+                                    <?php if (!$prestamo["fecha_devuelto"]): ?>
+                                        <form method="POST">
+                                            <input type="hidden" name="id_saca" value="<?php echo $prestamo["id"]; ?>">
+                                            <input type="submit" name="devolver" value="Devolver" class="btn-devolver">
+                                        </form>
+                                    <?php else: ?>
+                                        —
+                                    <?php endif; ?>
+                                </td>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p style="color:#777; font-style:italic;">No tienes libros apartados aún.</p>
+            <?php endif;
+            mysqli_stmt_close($stmt_h); ?>
+
+            <!-- MENSAJES DE ACTUALIZACIÓN -->
+            <?php if ($msg_update === "ok"): ?>
+                <p class="msg-exito">✔ Datos actualizados correctamente.</p>
+            <?php elseif ($msg_update === "error"): ?>
+                <p class="msg-error">⚠ Error al actualizar. Intenta de nuevo.</p>
+            <?php elseif ($msg_update === "vacio"): ?>
+                <p class="msg-error">⚠ Llena al menos un campo para actualizar.</p>
+            <?php endif; ?>
+
+            <!-- BOTÓN TOGGLE EDITAR -->
+            <button type="button" class="btn-editar-toggle" onclick="toggleEditar()">✏ Editar mis datos</button>
+
+            <!-- FORMULARIO EDITAR (oculto por defecto) -->
+            <div id="form-editar" style="display:none;">
+                <h3>Editar mis datos</h3>
+                <form method="POST">
+                    <div class="campo">
+                        <label for="telefono_nuevo">Nuevo teléfono</label>
+                        <input type="tel" id="telefono_nuevo" name="telefono_nuevo" placeholder="10 dígitos"
+                            pattern="[0-9]{10}" maxlength="10" value="<?php echo ($u['telefono']); ?>">
+                    </div>
+                    <div class="campo">
+                        <label for="password_nuevo">Nueva contraseña</label>
+                        <input type="password" id="password_nuevo" name="password_nuevo" placeholder="Mínimo 8 caracteres"
+                            minlength="8">
+                    </div>
+                    <input type="submit" name="actualizar" value="Guardar cambios">
+                </form>
+            </div>
+
+            <!-- BOTONES CERRAR Y ELIMINAR -->
+            <div class="btns-cuenta">
+                <form method="POST" style="flex:1;">
+                    <input type="submit" name="cerrar_sesion" value="Cerrar sesión" class="btn-cerrar-sesion">
+                </form>
+                <form method="POST" style="flex:1;"
+                    onsubmit="return confirm('¿Seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer.');">
+                    <input type="submit" name="eliminar_cuenta" value="Eliminar cuenta" class="btn-eliminar">
+                </form>
+            </div>
+
+            <!-- JAVASCRIPT TOGGLE EDITAR -->
+            <script>
+                function toggleEditar() {
+                    var div = document.getElementById('form-editar');
+                    div.style.display = div.style.display === 'none' ? 'block' : 'none';
+                }
+                <?php if ($msg_update !== ""): ?>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        document.getElementById('form-editar').style.display = 'block';
+                    });
+                <?php endif; ?>
+            </script>
 
         <?php else: ?>
 
+            <!-- TÍTULO -->
             <div class="titulo-pagina">
                 <img src="../IMAGENES/Comando_Bloque.png" alt="Sesión" class="icono-pagina">
-                <h2>Iniciar sesión</h2>
+                <h2>Acceso a mi cuenta</h2>
             </div>
 
-            <p>Para ver tu información registrada, primero debes completar el formulario de registro en
-                <a href="../index.php#registro">la página de inicio</a>.
-            </p>
+            <!-- MENSAJES DE ERROR / ÉXITO -->
+            <?php if (isset($_GET["eliminado"]) && $_GET["eliminado"] === "ok"): ?>
+                <p class="msg-exito">✔ Cuenta eliminada correctamente.</p>
+            <?php elseif (isset($_GET["error"]) && $_GET["error"] === "existe"): ?>
+                <p class="msg-error">⚠ Ese correo ya está registrado. Inicia sesión.</p>
+            <?php elseif (isset($_GET["error"]) && $_GET["error"] === "db"): ?>
+                <p class="msg-error">⚠ Error al guardar. Intenta de nuevo.</p>
+            <?php elseif (isset($_GET["registro"]) && $_GET["registro"] === "ok"): ?>
+                <p class="msg-exito">✔ Cuenta creada correctamente.</p>
+            <?php endif; ?>
+            <?php if ($error_login): ?>
+                <p class="msg-error">⚠ <?php echo $error_login; ?></p>
+            <?php endif; ?>
 
+            <!-- PESTAÑAS -->
+            <div class="tabs">
+                <button class="tab-btn activo-tab" onclick="mostrarTab('login', event)">Iniciar sesión</button>
+                <button class="tab-btn" onclick="mostrarTab('registro', event)">Registrarse</button>
+            </div>
+
+            <!-- FORMULARIO INICIAR SESIÓN -->
+            <div id="form-login" class="tab-contenido">
+                <form method="POST">
+                    <div class="campo">
+                        <label for="email_login">Correo electrónico</label>
+                        <input type="email" id="email_login" name="email_login" placeholder="correo@ejemplo.com" required>
+                    </div>
+                    <div class="campo">
+                        <label for="password_login">Contraseña</label>
+                        <input type="password" id="password_login" name="password_login" placeholder="Tu contraseña"
+                            required>
+                    </div>
+                    <input type="submit" name="iniciar_sesion" value="Entrar">
+                </form>
+            </div>
+
+            <!-- FORMULARIO REGISTRO -->
+            <div id="form-registro" class="tab-contenido" style="display:none;">
+                <form action="REGISTRO.php" method="POST">
+                    <div class="campo">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Bodoque" required>
+                    </div>
+                    <div class="campo">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+                    </div>
+                    <div class="campo">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres" minlength="8"
+                            required>
+                    </div>
+                    <div class="campo">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7771234567" pattern="[0-9]{10}"
+                            maxlength="10" required>
+                    </div>
+                    <div class="campo">
+                        <label>Género</label>
+                        <div class="radio-grupo">
+                            <label class="radio-opcion"><input type="radio" name="genero" value="Masculino" checked>
+                                Masculino</label>
+                            <label class="radio-opcion"><input type="radio" name="genero" value="Femenino"> Femenino</label>
+                        </div>
+                    </div>
+                    <div class="campo">
+                        <label>Tipo de usuario</label>
+                        <div class="radio-grupo">
+                            <label class="radio-opcion"><input type="radio" name="tipo" value="visitante" checked>
+                                Visitante</label>
+                            <label class="radio-opcion"><input type="radio" name="tipo" value="administrador">
+                                Administrador</label>
+                        </div>
+                    </div>
+                    <input type="submit" value="Crear cuenta">
+                </form>
+            </div>
+
+            <!-- TABLA DE BENEFICIOS -->
             <h3>Tipos de usuario</h3>
             <table>
                 <thead>
@@ -169,9 +406,33 @@ session_start();
                 </tbody>
             </table>
 
+            <!-- JAVASCRIPT PESTAÑAS -->
+            <script>
+                function mostrarTab(cual, event) {
+                    document.getElementById('form-login').style.display = 'none';
+                    document.getElementById('form-registro').style.display = 'none';
+
+                    var botones = document.querySelectorAll('.tab-btn');
+                    botones.forEach(function (btn) {
+                        btn.classList.remove('activo-tab');
+                    });
+
+                    document.getElementById('form-' + cual).style.display = 'block';
+                    event.target.classList.add('activo-tab');
+                }
+
+                <?php if (isset($_GET["error"])): ?>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var btnRegistro = document.querySelectorAll('.tab-btn')[1];
+                        btnRegistro.click();
+                    });
+                <?php endif; ?>
+            </script>
+
         <?php endif; ?>
 
         <a href="../index.php" class="btn-regresar">Regresar al inicio</a>
+
     </main>
 
     <footer>
@@ -200,7 +461,7 @@ session_start();
                     <li><a href="../index.php">Inicio</a></li>
                     <li><a href="../HTML/MISION.html">Misión y Visión</a></li>
                     <li><a href="../HTML/TEMPORADA.html">Talleres de Temporada</a></li>
-                    <li><a href="../HTML/CATALOGO.html">Catálogo</a></li>
+                    <li><a href="../PHP/CATALOGO.php">Catálogo</a></li>
                     <li><a href="../HTML/SERVICIOS.html">Servicios</a></li>
                     <li><a href="../HTML/CREDENCIAL.html">Credencial</a></li>
                     <li><a href="LOGIN.php">Cuenta</a></li>

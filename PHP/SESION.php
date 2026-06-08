@@ -37,8 +37,8 @@ if (isset($_POST["registrar"])) { // REGISTRO DE USUARIO
 
     if ($existe) {
         $error_registro = "Ya existe una cuenta con ese correo.";
-    } elseif (strlen($password) < 6) {
-        $error_registro = "La contraseña debe tener al menos 6 caracteres.";
+    } elseif (strlen($password) < 8) {
+        $error_registro = "La contraseña debe tener al menos 8 caracteres.";
     } else {
         // Agregar usuario al arreglo de sesión
         $_SESSION["usuarios"][] = [

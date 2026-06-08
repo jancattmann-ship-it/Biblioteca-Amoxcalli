@@ -80,13 +80,14 @@ nav ul li a {
 
 nav ul li a:hover {
   background-color: #2e6b35;
-  color: white;
+  color: #C9A96E;
+  border-bottom: 3px dashed #C9A96E;
 }
 
-/* Página activa con acento dorado — igual que temixco.gob.mx */
+/* PAGINA ABIERTA*/
 nav ul li a.activo {
   background-color: #2e6b35;
-  border-bottom: 3px solid #C9A96E;
+  border-bottom: 3px dashed #C9A96E;
   color: #C9A96E;
   font-weight: 600;
 }
