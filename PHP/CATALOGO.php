@@ -2,9 +2,9 @@
 session_start();
 include_once("CONEXION.php");
 
-// Obtener todos los libros de la BD
+// Obtener libros de la BD 
 $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
-mysqli_close($con);
+// ← mysqli_close eliminado, se cierra al final
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -80,29 +80,51 @@ mysqli_close($con);
     </div>
 
     <div class="banner-nuevos">
-      Nuevas Adquisiciones — Mayo 2026
+      Nuevas Adquisiciones - Mayo 2026
     </div>
 
     <div class="catalogo">
       <?php while ($libro = mysqli_fetch_assoc($resultado)): ?>
+
+        <?php
+        // Verificar si el libro ya está apartado
+        $stmt_disp = mysqli_prepare($con, "SELECT id FROM saca WHERE cod_libro = ? AND fecha_devuelto IS NULL");
+        mysqli_stmt_bind_param($stmt_disp, "s", $libro['cod_libro']);
+        mysqli_stmt_execute($stmt_disp);
+        mysqli_stmt_store_result($stmt_disp);
+        $ocupado = mysqli_stmt_num_rows($stmt_disp) > 0;
+        mysqli_stmt_close($stmt_disp);
+        ?>
+
         <div class="card <?php echo ($libro['categoria']); ?>">
-          <img src="../IMAGENES/<?php echo ($libro['imagen']); ?>"
-            alt="<?php echo ($libro['titulo']); ?>">
+          <img src="../IMAGENES/<?php echo ($libro['imagen']); ?>" alt="<?php echo ($libro['titulo']); ?>">
           <div class="titulo"><?php echo ($libro['titulo']); ?></div>
           <div class="descripcion">
             Tema: <?php echo ucfirst(($libro['categoria'])); ?>
           </div>
-          <form action="../PHP/RESERVAR.php" method="post">
-            <input type="hidden" name="libro" value="<?php echo ($libro['titulo']); ?>">
-            <div class="reserva-cantidad">
-              <label>Cantidad:</label>
-              <input type="number" name="cantidad" value="1" min="1" max="1">
+
+          <?php if ($ocupado): ?>
+            <div class="sin-sesion">
+              <p class="disponibilidad no-disponible">No disponible</p>
+              <span class="btn-reservar btn-no-disponible">No disponible</span>
             </div>
-            <p class="disponibilidad">1 ejemplar disponible</p>
-            <input type="submit" class="btn-reservar" value="Apartar">
-          </form>
+          <?php elseif (isset($_SESSION["usuario"])): ?>
+            <form action="../PHP/RESERVAR.php" method="post">
+              <input type="hidden" name="libro" value="<?php echo ($libro['titulo']); ?>">
+              <input type="hidden" name="cantidad" value="1">
+              <p class="disponibilidad">1 ejemplar disponible</p>
+              <input type="submit" class="btn-reservar" value="Apartar">
+            </form>
+          <?php else: ?>
+            <div class="sin-sesion">
+              <p class="disponibilidad">1 ejemplar disponible</p>
+              <a href="../PHP/LOGIN.php" class="btn-reservar">Inicia sesión para apartar</a>
+            </div>
+          <?php endif; ?>
+
         </div>
       <?php endwhile; ?>
+      <?php mysqli_close($con); ?>
     </div>
 
     <a href="../index.php" class="btn-regresar">Regresar al inicio</a>

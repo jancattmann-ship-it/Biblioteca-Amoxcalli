@@ -254,3 +254,47 @@
   background-color: #2e6b35;
   color: white;
 }
+
+/* BOTÓN SIN SESIÓN — al final del archivo */
+.sin-sesion .btn-reservar {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 8px 0;
+  font-size: 0.82em;
+  width: 100%;
+  background-color: #1a3e1f;
+  color: #C9A96E;
+  border-radius: 6px;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+
+.sin-sesion .btn-reservar:hover {
+  background-color: #C9A96E;
+  color: #1a3e1f;
+}
+
+/* NO DISPONIBLE */
+.disponibilidad.no-disponible {
+  color: #b71c1c;
+  font-weight: 600;
+}
+
+.btn-no-disponible {
+  display: block;
+  text-align: center;
+  background-color: #1a3e1f;
+  color: #C9A96E;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.82em;
+  padding: 8px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: not-allowed;
+  pointer-events: none;
+  margin-top: 8px;
+}

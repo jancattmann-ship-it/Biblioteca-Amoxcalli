@@ -1,6 +1,7 @@
-alert(x);
 
 const x = "\"Bienvenido al catálogo de la biblioteca Amoxcalli\""
+
+alert(x);
 
 // BARRA DE BÚSQUEDA Y FILTRO POR GÉNERO
 function filtrar() { //funcion que se ejecuta cada que escriban
