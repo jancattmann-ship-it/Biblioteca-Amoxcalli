@@ -1,17 +1,26 @@
 <?php
 session_start();
+/** @var mysqli $con */
 include_once("CONEXION.php");
 
-// --- CERRAR SESIÓN ---
+// CERRAR SESIÓN
 if (isset($_POST["cerrar_sesion"])) {
     session_destroy();
     header("Location: LOGIN.php");
     exit();
 }
 
-// --- ELIMINAR CUENTA ---
+// ELIMINAR CUENTA
 if (isset($_POST["eliminar_cuenta"])) {
     $email = $_SESSION["usuario"]["email"];
+
+    // Primero eliminar los préstamos activos del usuario (saca) para no violar la FK
+    $stmt0 = mysqli_prepare($con, "DELETE FROM saca WHERE email = ?");
+    mysqli_stmt_bind_param($stmt0, "s", $email);
+    mysqli_stmt_execute($stmt0);
+    mysqli_stmt_close($stmt0);
+
+    // Ahora sí eliminar la cuenta
     $stmt = mysqli_prepare($con, "DELETE FROM usuarios WHERE email = ?");
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
@@ -24,16 +33,38 @@ if (isset($_POST["eliminar_cuenta"])) {
 // --- DEVOLVER LIBRO ---
 if (isset($_POST["devolver"])) {
     $id_saca = $_POST["id_saca"];
+    $email_actual = $_SESSION["usuario"]["email"];
     $fecha_hoy = date("Y-m-d");
+
+    //Esto es para que la tabla "Registro" se actualice al devolver el libro, ya que al no estar relacionada del todo, no se actualiza sola
+
+    // Obtener el cod_libro y fecha_pedido de ese préstamo antes de actualizar
+    $stmt_get = mysqli_prepare($con, "SELECT cod_libro, fecha_pedido FROM saca WHERE id = ? AND email = ?");
+    mysqli_stmt_bind_param($stmt_get, "is", $id_saca, $email_actual);
+    mysqli_stmt_execute($stmt_get);
+    $res_get = mysqli_stmt_get_result($stmt_get);
+    $datos_saca = mysqli_fetch_assoc($res_get);
+    mysqli_stmt_close($stmt_get);
+
+    // Actualizar saca
     $stmt_dev = mysqli_prepare($con, "UPDATE saca SET fecha_devuelto = ? WHERE id = ? AND email = ?");
-    mysqli_stmt_bind_param($stmt_dev, "sis", $fecha_hoy, $id_saca, $_SESSION["usuario"]["email"]);
+    mysqli_stmt_bind_param($stmt_dev, "sis", $fecha_hoy, $id_saca, $email_actual);
     mysqli_stmt_execute($stmt_dev);
     mysqli_stmt_close($stmt_dev);
+
+    // Actualizar también el registro correspondiente en "registros"
+    if ($datos_saca) {
+        $stmt_dev2 = mysqli_prepare($con, "UPDATE registros SET fecha_devuelto = ? WHERE email = ? AND cod_libro = ? AND fecha_pedido = ? AND fecha_devuelto IS NULL");
+        mysqli_stmt_bind_param($stmt_dev2, "ssss", $fecha_hoy, $email_actual, $datos_saca["cod_libro"], $datos_saca["fecha_pedido"]);
+        mysqli_stmt_execute($stmt_dev2);
+        mysqli_stmt_close($stmt_dev2);
+    }
+
     header("Location: LOGIN.php");
     exit();
 }
 
-// --- ACTUALIZAR DATOS ---
+// ACTUALIZAR DATOS
 $msg_update = "";
 if (isset($_POST["actualizar"])) {
     $email = $_SESSION["usuario"]["email"];
@@ -66,7 +97,7 @@ if (isset($_POST["actualizar"])) {
     }
 }
 
-// --- INICIAR SESIÓN ---
+// INICIAR SESIÓN
 $error_login = "";
 if (isset($_POST["iniciar_sesion"])) {
     $email = trim($_POST["email_login"]);
@@ -150,6 +181,112 @@ if (isset($_POST["iniciar_sesion"])) {
                     <p>Bienvenido al panel de administración, <strong><?php echo ($u["nombre"]); ?></strong>.
                         Desde aquí puedes gestionar los recursos de la biblioteca.</p>
                 </div>
+
+                <!-- HISTORIAL COMPLETO (TODOS LOS USUARIOS) -->
+                <h3>Historial completo de préstamos</h3>
+
+                <input type="text" id="buscador-admin" placeholder="Buscar por nombre o correo..." oninput="filtrarUsuarios()" style="width:100%; padding:9px 13px; border:1px solid #c8e6c9; border-radius:5px; margin-bottom:14px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+                <?php
+                $stmt_r = mysqli_prepare($con, "SELECT email, nombre, titulo_libro, cod_libro, fecha_pedido, fecha_devuelto FROM registros ORDER BY email ASC, fecha_pedido DESC");
+                mysqli_stmt_execute($stmt_r);
+                $resultado_r = mysqli_stmt_get_result($stmt_r);
+
+                // Agrupar registros por usuario
+                $usuarios_hist = [];
+                while ($r = mysqli_fetch_assoc($resultado_r)) {
+                    $key = $r["email"];
+                    if (!isset($usuarios_hist[$key])) {
+                        $usuarios_hist[$key] = [
+                            "nombre" => $r["nombre"],
+                            "email" => $r["email"],
+                            "pedidos" => []
+                        ];
+                    }
+                    $usuarios_hist[$key]["pedidos"][] = $r;
+                }
+                mysqli_stmt_close($stmt_r);
+                ?>
+
+                <?php if (count($usuarios_hist) > 0): ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Correo</th>
+                                <th>Total de préstamos</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $i = 0;
+                            foreach ($usuarios_hist as $uh): $i++; ?>
+                                <tr class="fila-usuario-admin">
+                                    <td><?php echo htmlspecialchars($uh["nombre"]); ?></td>
+                                    <td><?php echo htmlspecialchars($uh["email"]); ?></td>
+                                    <td><?php echo count($uh["pedidos"]); ?></td>
+                                    <td><button type="button" class="btn-devolver" onclick="togglePedidos(<?php echo $i; ?>)">Ver pedidos</button></td>
+                                </tr>
+                                <tr id="pedidos-<?php echo $i; ?>" class="fila-usuario-admin" style="display:none;">
+                                    <td colspan="4" style="padding:0; border:none;">
+                                        <table style="margin:0;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Libro</th>
+                                                    <th>Código</th>
+                                                    <th>Fecha préstamo</th>
+                                                    <th>Fecha devolución</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($uh["pedidos"] as $p): ?>
+                                                    <tr>
+                                                        <td><?php echo htmlspecialchars($p["titulo_libro"]); ?></td>
+                                                        <td><?php echo htmlspecialchars($p["cod_libro"]); ?></td>
+                                                        <td><?php echo date("d/m/Y", strtotime($p["fecha_pedido"])); ?></td>
+                                                        <td><?php echo $p["fecha_devuelto"] ? date("d/m/Y", strtotime($p["fecha_devuelto"])) : "Pendiente"; ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <p style="color:#777; font-style:italic;">Aún no hay registros en el historial.</p>
+                <?php endif; ?>
+
+                <!-- JS: TOGGLE DE PEDIDOS Y BUSCADOR -->
+                <script>
+                    function togglePedidos(i) {
+                        var fila = document.getElementById('pedidos-' + i);
+                        fila.style.display = fila.style.display === 'none' ? 'table-row' : 'none';
+                    }
+
+                    function filtrarUsuarios() {
+                        var busqueda = document.getElementById('buscador-admin').value.toLowerCase();
+                        var filas = document.querySelectorAll('.fila-usuario-admin');
+
+                        filas.forEach(function(fila) {
+                            // Solo evalúa el texto de las filas principales (no las de detalle)
+                            if (fila.id.startsWith('pedidos-')) return;
+
+                            var texto = fila.textContent.toLowerCase();
+                            var coincide = texto.includes(busqueda);
+                            fila.style.display = coincide ? '' : 'none';
+
+                            // Si se oculta la fila principal, también ocultar su detalle
+                            var idDetalle = fila.querySelector('button').getAttribute('onclick').match(/\d+/)[0];
+                            var detalle = document.getElementById('pedidos-' + idDetalle);
+                            if (!coincide) {
+                                detalle.style.display = 'none';
+                            }
+                        });
+                    }
+                </script>
+
             <?php else: ?>
                 <div class="panel-visitante">
                     <span class="badge-tipo">Visitante</span>
@@ -194,39 +331,63 @@ if (isset($_POST["iniciar_sesion"])) {
             $resultado_h = mysqli_stmt_get_result($stmt_h);
 
             if (mysqli_num_rows($resultado_h) > 0): ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Código</th>
-                            <th>Fecha préstamo</th>
-                            <th>Fecha devolución</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($prestamo = mysqli_fetch_assoc($resultado_h)): ?>
-                            <tr>
-                                <td><?php echo ($prestamo["titulo"]); ?></td>
-                                <td><?php echo ($prestamo["cod_libro"]); ?></td>
-                                <td><?php echo date("d/m/Y", strtotime($prestamo["fecha_pedido"])); ?></td>
-                                <td><?php echo $prestamo["fecha_devuelto"] ? date("d/m/Y", strtotime($prestamo["fecha_devuelto"])) : "Pendiente"; ?>
-                                </td>
-                                <td>
-                                    <?php if (!$prestamo["fecha_devuelto"]): ?>
-                                        <form method="POST">
-                                            <input type="hidden" name="id_saca" value="<?php echo $prestamo["id"]; ?>">
-                                            <input type="submit" name="devolver" value="Devolver" class="btn-devolver">
-                                        </form>
-                                    <?php else: ?>
-                                        —
-                                    <?php endif; ?>
-                                </td>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
+                <div class="lista-prestamos">
+                    <?php $j = 0;
+                    while ($prestamo = mysqli_fetch_assoc($resultado_h)): $j++; ?>
+                        <div class="prestamo-item">
+                            <div class="prestamo-resumen">
+                                <span class="prestamo-titulo"><?php echo ($prestamo["titulo"]); ?></span>
+                                <button type="button" class="btn-ver-mas" onclick="togglePrestamo(<?php echo $j; ?>)">Ver más</button>
+                            </div>
+                            <div id="prestamo-detalle-<?php echo $j; ?>" class="prestamo-detalle" style="display:none;">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Código</strong></td>
+                                            <td><?php echo ($prestamo["cod_libro"]); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Fecha préstamo</strong></td>
+                                            <td><?php echo date("d/m/Y", strtotime($prestamo["fecha_pedido"])); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Fecha devolución</strong></td>
+                                            <td><?php echo $prestamo["fecha_devuelto"] ? date("d/m/Y", strtotime($prestamo["fecha_devuelto"])) : "Pendiente"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Acción</strong></td>
+                                            <td>
+                                                <?php if (!$prestamo["fecha_devuelto"]): ?>
+                                                    <form method="POST">
+                                                        <input type="hidden" name="id_saca" value="<?php echo $prestamo["id"]; ?>">
+                                                        <input type="submit" name="devolver" value="Devolver" class="btn-devolver">
+                                                    </form>
+                                                <?php else: ?>
+                                                    —
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+
+                <!-- JAVASCRIPT TOGGLE PRÉSTAMOS -->
+                <script>
+                    function togglePrestamo(j) {
+                        var detalle = document.getElementById('prestamo-detalle-' + j);
+                        var boton = detalle.previousElementSibling.querySelector('.btn-ver-mas');
+                        if (detalle.style.display === 'none') {
+                            detalle.style.display = 'block';
+                            boton.textContent = 'Ver menos';
+                        } else {
+                            detalle.style.display = 'none';
+                            boton.textContent = 'Ver más';
+                        }
+                    }
+                </script>
             <?php else: ?>
                 <p style="color:#777; font-style:italic;">No tienes libros apartados aún.</p>
             <?php endif;
@@ -280,7 +441,7 @@ if (isset($_POST["iniciar_sesion"])) {
                     div.style.display = div.style.display === 'none' ? 'block' : 'none';
                 }
                 <?php if ($msg_update !== ""): ?>
-                    document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('form-editar').style.display = 'block';
                     });
                 <?php endif; ?>
@@ -359,15 +520,7 @@ if (isset($_POST["iniciar_sesion"])) {
                             <label class="radio-opcion"><input type="radio" name="genero" value="Femenino"> Femenino</label>
                         </div>
                     </div>
-                    <div class="campo">
-                        <label>Tipo de usuario</label>
-                        <div class="radio-grupo">
-                            <label class="radio-opcion"><input type="radio" name="tipo" value="visitante" checked>
-                                Visitante</label>
-                            <label class="radio-opcion"><input type="radio" name="tipo" value="administrador">
-                                Administrador</label>
-                        </div>
-                    </div>
+
                     <input type="submit" value="Crear cuenta">
                 </form>
             </div>
@@ -413,7 +566,7 @@ if (isset($_POST["iniciar_sesion"])) {
                     document.getElementById('form-registro').style.display = 'none';
 
                     var botones = document.querySelectorAll('.tab-btn');
-                    botones.forEach(function (btn) {
+                    botones.forEach(function(btn) {
                         btn.classList.remove('activo-tab');
                     });
 
@@ -422,7 +575,7 @@ if (isset($_POST["iniciar_sesion"])) {
                 }
 
                 <?php if (isset($_GET["error"])): ?>
-                    document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded', function() {
                         var btnRegistro = document.querySelectorAll('.tab-btn')[1];
                         btnRegistro.click();
                     });

@@ -1,5 +1,6 @@
 <?php
 session_start();
+/** @var mysqli $con */
 include_once("CONEXION.php");
 
 // Solo se ejecuta si llegaron datos del formulario
@@ -13,7 +14,7 @@ $email    = trim($_POST["email"]);
 $telefono = trim($_POST["telefono"]);
 $genero   = $_POST["genero"];
 $password = $_POST["password"];
-$tipo     = $_POST["tipo"];
+$tipo     = "visitante";
 
 // Verificar si el correo ya existe
 $stmt = mysqli_prepare($con, "SELECT email FROM usuarios WHERE email = ?");

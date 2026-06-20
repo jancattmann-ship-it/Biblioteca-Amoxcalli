@@ -1,10 +1,11 @@
 <?php
 session_start();
+/** @var mysqli $con */
 include_once("CONEXION.php");
 
 // Obtener libros de la BD 
 $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
-// ← mysqli_close eliminado, se cierra al final
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

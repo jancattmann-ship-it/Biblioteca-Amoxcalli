@@ -250,7 +250,7 @@ input[type="submit"]:hover {
 /* BOTÓN DEVOLVER */
 .btn-devolver {
     padding: 5px 12px;
-    background-color: #2e6b35;
+    background-color: #1a3e1f;
     color: white;
     border: none;
     border-radius: 4px;
@@ -262,5 +262,65 @@ input[type="submit"]:hover {
 }
 
 .btn-devolver:hover {
+    background-color: #2e6b35;
+}
+
+/* CORREGIR HOVER EN TABLA INTERNA DE PEDIDOS (PANEL ADMIN) */
+.fila-usuario-admin table thead tr:hover {
     background-color: #1a3e1f;
+}
+
+/* LISTA DE PRÉSTAMOS (MIS LIBROS APARTADOS) */
+.lista-prestamos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.prestamo-item {
+    border: 1px solid #d4e8d4;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.prestamo-resumen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: #f5faf5;
+}
+
+.prestamo-titulo {
+    font-weight: 600;
+    color: #1a3e1f;
+    font-size: 0.95em;
+}
+
+.btn-ver-mas {
+    padding: 6px 14px;
+    background-color: #1a3e1f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.82em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.btn-ver-mas:hover {
+    background-color: #2e6b35;
+}
+
+.prestamo-detalle {
+    padding: 0 16px 12px;
+}
+
+.prestamo-detalle table {
+    margin: 10px 0 0;
 }

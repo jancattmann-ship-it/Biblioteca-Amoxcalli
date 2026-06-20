@@ -1,5 +1,6 @@
 <?php
 session_start();
+/** @var mysqli $con */
 include_once("CONEXION.php");
 
 // Recibir título del libro
@@ -47,11 +48,19 @@ if (isset($_GET["id"]) && $_GET["id"] > 0) {
 
 if (isset($_SESSION["usuario"]) && $cod_libro !== null && !isset($_GET["id"])) {
     $email = $_SESSION["usuario"]["email"];
+    $nombre = $_SESSION["usuario"]["nombre"];
     $stmt2 = mysqli_prepare($con, "INSERT INTO saca (email, cod_libro, fecha_pedido) VALUES (?, ?, ?)");
     mysqli_stmt_bind_param($stmt2, "sss", $email, $cod_libro, $fecha_prestamo);
     if (mysqli_stmt_execute($stmt2)) {
         $id_prestamo = mysqli_insert_id($con);
         mysqli_stmt_close($stmt2);
+
+        // Guardar también en el historial permanente "registros"
+        $stmt3 = mysqli_prepare($con, "INSERT INTO registros (email, nombre, cod_libro, titulo_libro, fecha_pedido) VALUES (?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt3, "sssss", $email, $nombre, $cod_libro, $titulo_libro, $fecha_prestamo);
+        mysqli_stmt_execute($stmt3);
+        mysqli_stmt_close($stmt3);
+
         mysqli_close($con);
         header("Location: RESERVAR.php?id=" . $id_prestamo . "&libro=" . urlencode($titulo_libro));
         exit();
@@ -65,6 +74,7 @@ mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,6 +83,7 @@ mysqli_close($con);
     <link rel="stylesheet" href="../CSS/RESERVAR.css">
     <link rel="icon" href="../IMAGENES/Fav.png" type="image/png">
 </head>
+
 <body>
 
     <header>
@@ -127,11 +138,26 @@ mysqli_close($con);
                 <div class="ticket-seccion-titulo">Libro apartado</div>
                 <table>
                     <tbody>
-                        <tr><td><strong>Título</strong></td><td><?php echo htmlspecialchars($titulo_libro); ?></td></tr>
-                        <tr><td><strong>Código</strong></td><td><?php echo $cod_libro ?? "No encontrado"; ?></td></tr>
-                        <tr><td><strong>Fecha de préstamo</strong></td><td><?php echo $fecha_prestamo_display; ?></td></tr>
-                        <tr><td><strong>Fecha de devolución</strong></td><td><?php echo $fecha_devolucion_display; ?></td></tr>
-                        <tr><td><strong>Cantidad</strong></td><td>1 ejemplar</td></tr>
+                        <tr>
+                            <td><strong>Título</strong></td>
+                            <td><?php echo htmlspecialchars($titulo_libro); ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Código</strong></td>
+                            <td><?php echo $cod_libro ?? "No encontrado"; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fecha de préstamo</strong></td>
+                            <td><?php echo $fecha_prestamo_display; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fecha de devolución</strong></td>
+                            <td><?php echo $fecha_devolucion_display; ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cantidad</strong></td>
+                            <td>1 ejemplar</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -143,10 +169,22 @@ mysqli_close($con);
                     <?php $u = $_SESSION["usuario"]; ?>
                     <table>
                         <tbody>
-                            <tr><td><strong>Nombre</strong></td><td><?php echo htmlspecialchars($u["nombre"]); ?></td></tr>
-                            <tr><td><strong>Correo</strong></td><td><?php echo htmlspecialchars($u["email"]); ?></td></tr>
-                            <tr><td><strong>Teléfono</strong></td><td><?php echo htmlspecialchars($u["telefono"]); ?></td></tr>
-                            <tr><td><strong>Tipo de cuenta</strong></td><td><?php echo htmlspecialchars($u["tipo"]); ?></td></tr>
+                            <tr>
+                                <td><strong>Nombre</strong></td>
+                                <td><?php echo htmlspecialchars($u["nombre"]); ?></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Correo</strong></td>
+                                <td><?php echo htmlspecialchars($u["email"]); ?></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Teléfono</strong></td>
+                                <td><?php echo htmlspecialchars($u["telefono"]); ?></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tipo de cuenta</strong></td>
+                                <td><?php echo htmlspecialchars($u["tipo"]); ?></td>
+                            </tr>
                         </tbody>
                     </table>
                 <?php else: ?>
@@ -216,4 +254,5 @@ mysqli_close($con);
         </div>
     </footer>
 </body>
+
 </html>
