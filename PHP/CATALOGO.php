@@ -183,7 +183,7 @@ $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
       var genero = document.getElementById('filtro-genero').value;
       var tarjetas = document.querySelectorAll('.card');
 
-      tarjetas.forEach(function (card) {
+      tarjetas.forEach(function(card) {
         var titulo = card.querySelector('.titulo').textContent.toLowerCase();
         var coincideBusqueda = titulo.includes(busqueda);
         var coincideGenero = genero === 'todos' || card.classList.contains(genero);
@@ -197,6 +197,13 @@ $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
     }
   </script>
 
+  <!-- HERRAMIENTAS GLOBALES: VOLVER ARRIBA Y TAMAÑO DE TEXTO -->
+  <button id="btn-volver-arriba" aria-label="Volver arriba">↑</button>
+  <div class="control-tamano-texto">
+    <button onclick="cambiarTamano(-2)" aria-label="Disminuir tamaño de texto">A-</button>
+    <button onclick="cambiarTamano(2)" aria-label="Aumentar tamaño de texto">A+</button>
+  </div>
+  <script src="../JS/HERRAMIENTAS.js"></script>
 </body>
 
 </html>

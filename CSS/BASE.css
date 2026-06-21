@@ -454,3 +454,81 @@ noscript p {
   margin-right: 5px;
   object-fit: contain;
 }
+
+/* BOTÓN FLOTANTE: VOLVER ARRIBA */
+#btn-volver-arriba {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #1a3e1f;
+  color: #C9A96E;
+  border: 2px solid #C9A96E;
+  font-size: 1.3em;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s, transform 0.25s, background-color 0.2s;
+  z-index: 200;
+}
+
+#btn-volver-arriba.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#btn-volver-arriba:hover {
+  background-color: #2e6b35;
+}
+
+/* CONTROL DE TAMAÑO DE TEXTO */
+.control-tamano-texto {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  gap: 6px;
+  z-index: 200;
+}
+
+.control-tamano-texto button {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background-color: #1a3e1f;
+  color: #C9A96E;
+  border: 2px solid #C9A96E;
+  font-size: 0.85em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.control-tamano-texto button:hover {
+  background-color: #2e6b35;
+}
+
+@media (max-width: 768px) {
+  #btn-volver-arriba {
+    width: 38px;
+    height: 38px;
+    bottom: 16px;
+    right: 16px;
+    font-size: 1.1em;
+  }
+
+  .control-tamano-texto {
+    bottom: 16px;
+    left: 16px;
+  }
+
+  .control-tamano-texto button {
+    width: 32px;
+    height: 32px;
+    font-size: 0.78em;
+  }
+}
