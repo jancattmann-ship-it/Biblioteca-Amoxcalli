@@ -24,7 +24,7 @@
     </div>
   </header>
 
-  <nav>
+  <nav> <!-- MENU antiguo -->
     <ul>
       <li><a href="../index.php">Inicio</a></li>
       <li><a href="MISION.html">Misión y Visión</a></li>
@@ -35,7 +35,15 @@
       <li><a href="CREDENCIAL.html">Credencial</a></li>
       <li><a href="../PHP/LOGIN.php">Cuenta</a></li>
       <li><a href="UBICACION.html">Ubicación</a></li>
-      <li><a href="PARTICIPANTES.html" class="activo">Participantes</a></li>
+      <li>
+        <a href="#" class="activo">Más <span class="nav-flecha">▾</span></a> <!-- MENU despegable -->
+        <ul class="dropdown">
+          <li><a href="REGLAMENTO.html">Reglamento</a></li>
+          <li><a href="PARTICIPANTES.html" class="activo">Participantes</a></li>
+          <li><a href="FAQ.html">FAQ</a></li>
+          <li><a href="GALERIA.html">Galería</a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
 
@@ -49,7 +57,7 @@
     <!-- EQUIPO -->
     <div class="equipo">
 
-      <div class="integrante">
+      <div class="integrante fade-in-scroll">
         <div class="credencial-franja">
           <span class="credencial-titulo">Biblioteca Amoxcalli</span>
           <span class="credencial-subtitulo">Credencial de Equipo</span>
@@ -73,7 +81,7 @@
         </div>
       </div>
 
-      <div class="integrante">
+      <div class="integrante fade-in-scroll">
         <div class="credencial-franja">
           <span class="credencial-titulo">Biblioteca Amoxcalli</span>
           <span class="credencial-subtitulo">Credencial de Equipo</span>
@@ -97,7 +105,7 @@
         </div>
       </div>
 
-      <div class="integrante">
+      <div class="integrante fade-in-scroll">
         <div class="credencial-franja">
           <span class="credencial-titulo">Biblioteca Amoxcalli</span>
           <span class="credencial-subtitulo">Credencial de Equipo</span>
@@ -121,7 +129,7 @@
         </div>
       </div>
 
-      <div class="integrante">
+      <div class="integrante fade-in-scroll">
         <div class="credencial-franja">
           <span class="credencial-titulo">Biblioteca Amoxcalli</span>
           <span class="credencial-subtitulo">Credencial de Equipo</span>
@@ -144,8 +152,6 @@
           <span>Temixco, Morelos · 2026</span>
         </div>
       </div>
-
-    </div>
 
     </div>
 
@@ -185,13 +191,13 @@
         <h4>Navegación</h4>
         <ul>
           <li><a href="../index.php">Inicio</a></li>
-          <li><a href="../HTML/MISION.html">Misión y Visión</a></li>
-          <li><a href="../HTML/TEMPORADA.html">Talleres de Temporada</a></li>
+          <li><a href="/MISION.html">Misión y Visión</a></li>
+          <li><a href="/TEMPORADA.html">Talleres de Temporada</a></li>
           <li><a href="../PHP/CATALOGO.php">Catálogo</a></li>
-          <li><a href="../HTML/SERVICIOS.html">Servicios</a></li>
-          <li><a href="../HTML/CREDENCIAL.html">Credencial</a></li>
+          <li><a href="/SERVICIOS.html">Servicios</a></li>
+          <li><a href="/CREDENCIAL.html">Credencial</a></li>
           <li><a href="../PHP/LOGIN.php">Cuenta</a></li>
-          <li><a href="../HTML/UBICACION.html">Ubicación</a></li>
+          <li><a href="/UBICACION.html">Ubicación</a></li>
         </ul>
       </div>
 
@@ -220,7 +226,10 @@
     <button onclick="cambiarTamano(-2)" aria-label="Disminuir tamaño de texto">A-</button>
     <button onclick="cambiarTamano(2)" aria-label="Aumentar tamaño de texto">A+</button>
   </div>
+
   <script src="../JS/HERRAMIENTAS.js"></script>
+
+  <script src="../JS/ANIMACIONES.js"></script>
 
 </body>
 

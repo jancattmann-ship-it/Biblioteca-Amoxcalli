@@ -190,3 +190,49 @@
   line-height: 1.5;
 }
 
+/* PERSONALIZACIÓN VENTANA DE BIENVENIDA (SweetAlert2) */
+.popup-amoxcalli {
+  border: 3px solid #C9A96E;
+  border-radius: 12px;
+}
+
+/* LIBRO DEL MES */
+.libro-del-mes {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background-color: #f5faf5;
+  border-left: 5px solid #C9A96E;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.libro-del-mes-imagen img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.libro-del-mes-etiqueta {
+  display: inline-block;
+  background-color: #1a3e1f;
+  color: #e8f5e9;
+  font-size: 0.78em;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.libro-del-mes-info h3 {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.libro-del-mes-info p {
+  margin-bottom: 12px;
+  text-align: left;
+}

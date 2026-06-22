@@ -1,0 +1,84 @@
+body {
+    background-color: #2e6b35;
+}
+
+main {
+    background-color: transparent;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tarjeta-404 {
+    background-color: #1a3e1f;
+    border-radius: 14px;
+    padding: 48px 40px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    margin: 40px 20px;
+}
+
+.codigo-404 {
+    font-size: 5em;
+    font-weight: 700;
+    color: #f5f7f5;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.subtitulo-404 {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #C9A96E;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.tarjeta-404 p {
+    color: #d8e8da;
+    text-align: center;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.btn-404 {
+    display: inline-block;
+    background-color: #C9A96E;
+    color: #1a3e1f;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 32px;
+    font-weight: 700;
+    font-size: 0.95em;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-404:hover {
+    background-color: #b8914d;
+    color: #ffffff;
+}
+
+.doodle {
+    position: fixed;
+    width: 90px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: -1;
+}
+
+main {
+    position: relative;
+    /* elimina overflow: hidden si lo tienes aquí */
+}

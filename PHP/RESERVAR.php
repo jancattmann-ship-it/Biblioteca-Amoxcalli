@@ -105,13 +105,21 @@ mysqli_close($con);
             <li><a href="../index.php">Inicio</a></li>
             <li><a href="../HTML/MISION.html">Misión y Visión</a></li>
             <li><a href="../HTML/TEMPORADA.html">Talleres de Temporada</a></li>
-            <li><a href="../PHP/CATALOGO.php" class="activo">Catálogo</a></li>
+            <li><a href="../PHP/CATALOGO.php">Catálogo</a></li>
             <li><a href="../HTML/SERVICIOS.html">Servicios</a></li>
             <li><a href="../HTML/HORARIO.html">Horario</a></li>
             <li><a href="../HTML/CREDENCIAL.html">Credencial</a></li>
             <li><a href="../PHP/LOGIN.php">Cuenta</a></li>
             <li><a href="../HTML/UBICACION.html">Ubicación</a></li>
-            <li><a href="../HTML/PARTICIPANTES.html">Participantes</a></li>
+            <li>
+                <a href="#">Más <span class="nav-flecha">▾</span></a>
+                <ul class="dropdown">
+                    <li><a href="../HTML/REGLAMENTO.html">Reglamento</a></li>
+                    <li><a href="../HTML/PARTICIPANTES.html">Participantes</a></li>
+                    <li><a href="../HTML/FAQ.html">FAQ</a></li>
+                    <li><a href="../HTML/GALERIA.html">Galería</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 

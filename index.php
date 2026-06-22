@@ -12,9 +12,8 @@ include_once("PHP/CONTADOR.php");
   <link rel="stylesheet" href="CSS/BASE.css">
   <link rel="stylesheet" href="CSS/index.css">
   <link rel="icon" href="IMAGENES/Fav.png" type="image/png">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Libreria para sweetalert -->
-  <script type="text/javascript" src="JS/MENSAJE.js"> </script>
-</head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script> <!-- Libreria para sweetalert -->
+  <script type="text/javascript" src="JS/MENSAJE.js" defer></script> <!-- El "defer" hace que el navegador cargue eso primero -->
 </head>
 
 <body>
@@ -34,18 +33,26 @@ include_once("PHP/CONTADOR.php");
         <img src="IMAGENES/libro_verde.png" alt="Cuenta" class="icono-cuenta"> <?php echo isset($_SESSION["usuario"]) ? ($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?> </a>
     </div>
   </header>
-  <nav> <!-- MENU -->
+  <nav> <!-- MENU antiguo -->
     <ul>
       <li><a href="index.php" class="activo">Inicio</a></li>
       <li><a href="HTML/MISION.html">Misión y Visión</a></li>
-      <li><a href="HTML/TEMPORADA.html">Talleres de Temporada </a></li>
+      <li><a href="HTML/TEMPORADA.html">Talleres de Temporada</a></li>
       <li><a href="PHP/CATALOGO.php">Catálogo</a></li>
       <li><a href="HTML/SERVICIOS.html">Servicios</a></li>
       <li><a href="HTML/HORARIO.html">Horario</a></li>
       <li><a href="HTML/CREDENCIAL.html">Credencial</a></li>
       <li><a href="PHP/LOGIN.php">Cuenta</a></li>
       <li><a href="HTML/UBICACION.html">Ubicación</a></li>
-      <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
+      <li>
+        <a href="#">Más <span class="nav-flecha">▾</span></a> <!-- MENU despegable -->
+        <ul class="dropdown">
+          <li><a href="HTML/REGLAMENTO.html">Reglamento</a></li>
+          <li><a href="HTML/PARTICIPANTES.html">Participantes</a></li>
+          <li><a href="HTML/FAQ.html">FAQ</a></li>
+          <li><a href="HTML/GALERIA.html">Galería</a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
 
@@ -69,26 +76,38 @@ include_once("PHP/CONTADOR.php");
 
     <h3>¿Qué deseas hacer?</h3>
     <div class="tarjetas"> <!-- TARJETAS CON ICONOS -->
-      <a href="HTML/HORARIO.html" class="tarjeta">
+      <a href="HTML/HORARIO.html" class="tarjeta fade-in-scroll">
         <img src="IMAGENES/Reloj.gif" alt="Horario">
         <p>Horario</p>
         <small>Lun–Vie 8am–7pm</small>
       </a>
-      <a href="HTML/SERVICIOS.html" class="tarjeta">
+      <a href="HTML/SERVICIOS.html" class="tarjeta fade-in-scroll">
         <img src="IMAGENES/cofre_ender.gif" alt="Servicios">
         <p>Servicios</p>
         <small>Ver todos</small>
       </a>
-      <a href="PHP/CATALOGO.php" class="tarjeta">
+      <a href="PHP/CATALOGO.php" class="tarjeta fade-in-scroll">
         <img src="IMAGENES/libro_Encantado.gif" alt="Catálogo">
         <p>Catálogo</p>
         <small>Ver libros</small>
       </a>
-      <a href="HTML/UBICACION.html" class="tarjeta">
+      <a href="HTML/UBICACION.html" class="tarjeta fade-in-scroll">
         <img src="IMAGENES/Compas.gif" alt="Ubicación">
         <p>Ubicación</p>
         <small>Pueblo Viejo, Temixco</small>
       </a>
+    </div>
+
+    <div class="libro-del-mes">
+      <div class="libro-del-mes-imagen">
+        <img src="IMAGENES/libro_Encantado.gif" alt="Libro del mes">
+      </div>
+      <div class="libro-del-mes-info">
+        <span class="libro-del-mes-etiqueta">Libro del mes</span>
+        <h3>Nombre del libro destacado</h3>
+        <p>Aquí va una breve descripción de por qué este libro es la recomendación del mes.</p>
+        <a href="PHP/CATALOGO.php" class="btn-regresar">Ver en el catálogo</a>
+      </div>
     </div>
 
     <div class="frase-bloque"> <!-- FRASE -->
@@ -182,7 +201,10 @@ include_once("PHP/CONTADOR.php");
     <button onclick="cambiarTamano(-2)" aria-label="Disminuir tamaño de texto">A-</button>
     <button onclick="cambiarTamano(2)" aria-label="Aumentar tamaño de texto">A+</button>
   </div>
+
   <script src="JS/HERRAMIENTAS.js"></script>
+
+  <script src="JS/ANIMACIONES.js"></script>
 
 </body>
 

@@ -47,7 +47,15 @@ $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
       <li><a href="../HTML/CREDENCIAL.html">Credencial</a></li>
       <li><a href="../PHP/LOGIN.php">Cuenta</a></li>
       <li><a href="../HTML/UBICACION.html">Ubicación</a></li>
-      <li><a href="../HTML/PARTICIPANTES.html">Participantes</a></li>
+      <li>
+        <a href="#">Más <span class="nav-flecha">▾</span></a>
+        <ul class="dropdown">
+          <li><a href="../HTML/REGLAMENTO.html">Reglamento</a></li>
+          <li><a href="../HTML/PARTICIPANTES.html">Participantes</a></li>
+          <li><a href="../HTML/FAQ.html">FAQ</a></li>
+          <li><a href="../HTML/GALERIA.html">Galería</a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
 
