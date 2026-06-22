@@ -2,8 +2,15 @@
 
 //  LOCAL (XAMPP) 
 $servername = "localhost";
-$username   = "root";
-$password   = "";
+
+// XAMPP
+//$username   = "root";
+//$password   = "";
+
+//MARIADB
+$username   = "amoxcalli";
+$password   = "amox1234";
+
 $db         = "amoxcalli";
 
 // Infinityfree - datos de conexión

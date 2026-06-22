@@ -16,6 +16,7 @@ $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
   <title>Catálogo de Libros | Amoxcalli</title>
   <link rel="stylesheet" href="../CSS/BASE.css">
   <link rel="stylesheet" href="../CSS/CATALOGO.css">
+  <script src="../JS/ANIMACIONES.js" defer></script>
   <link rel="icon" href="../IMAGENES/Fav.png" type="image/png">
   <script type="text/javascript" src="../JS/MENSAJE2.js"></script>
 </head>
@@ -86,13 +87,20 @@ $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
         <option value="economia">Economía y Desarrollo</option>
         <option value="historia">Historia y Cultura</option>
       </select>
+      <select id="orden" onchange="filtrar()">
+        <option value="az">Título A–Z</option>
+        <option value="za">Título Z–A</option>
+      </select>
+      <div class="vista-toggle">
+        <button id="btn-cuadricula" class="btn-vista activo-vista" onclick="setVista('cuadricula')" title="Vista cuadrícula">⊞</button>
+        <button id="btn-lista" class="btn-vista" onclick="setVista('lista')" title="Vista lista">☰</button>
+      </div>
     </div>
-
     <div class="banner-nuevos">
       Nuevas Adquisiciones - Mayo 2026
     </div>
 
-    <div class="catalogo">
+    <div class="catalogo" id="catalogo">
       <?php while ($libro = mysqli_fetch_assoc($resultado)): ?>
 
         <?php
@@ -105,7 +113,7 @@ $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
         mysqli_stmt_close($stmt_disp);
         ?>
 
-        <div class="card <?php echo ($libro['categoria']); ?>">
+        <div class="card fade-in <?php echo ($libro['categoria']); ?>">
           <img src="../IMAGENES/<?php echo ($libro['imagen']); ?>" alt="<?php echo ($libro['titulo']); ?>">
           <div class="titulo"><?php echo ($libro['titulo']); ?></div>
           <div class="descripcion">
@@ -186,21 +194,59 @@ $resultado = mysqli_query($con, "SELECT * FROM libros ORDER BY titulo ASC");
 
   <!-- JAVASCRIPT BUSCADOR Y FILTRO -->
   <script>
+    // VISTA (cuadrícula o lista)
+    function setVista(vista) {
+      var catalogo = document.getElementById('catalogo');
+      var btnCuadricula = document.getElementById('btn-cuadricula');
+      var btnLista = document.getElementById('btn-lista');
+
+      if (vista === 'lista') {
+        catalogo.classList.add('vista-lista');
+        btnLista.classList.add('activo-vista');
+        btnCuadricula.classList.remove('activo-vista');
+      } else {
+        catalogo.classList.remove('vista-lista');
+        btnCuadricula.classList.add('activo-vista');
+        btnLista.classList.remove('activo-vista');
+      }
+      localStorage.setItem('vista-catalogo', vista);
+    }
+
+    // Restaurar vista guardada
+    document.addEventListener('DOMContentLoaded', function() {
+      var vistaGuardada = localStorage.getItem('vista-catalogo') || 'cuadricula';
+      setVista(vistaGuardada);
+    });
+
+    // FILTRAR + ORDENAR
     function filtrar() {
       var busqueda = document.getElementById('buscador').value.toLowerCase();
       var genero = document.getElementById('filtro-genero').value;
-      var tarjetas = document.querySelectorAll('.card');
+      var orden = document.getElementById('orden').value;
+      var catalogo = document.getElementById('catalogo');
+      var tarjetas = Array.from(catalogo.querySelectorAll('.card'));
 
+      // Filtrar
       tarjetas.forEach(function(card) {
         var titulo = card.querySelector('.titulo').textContent.toLowerCase();
         var coincideBusqueda = titulo.includes(busqueda);
         var coincideGenero = genero === 'todos' || card.classList.contains(genero);
+        card.style.display = (coincideBusqueda && coincideGenero) ? '' : 'none';
+      });
 
-        if (coincideBusqueda && coincideGenero) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+      // Ordenar las visibles
+      var visibles = tarjetas.filter(function(card) {
+        return card.style.display !== 'none';
+      });
+
+      visibles.sort(function(a, b) {
+        var tA = a.querySelector('.titulo').textContent.trim().toLowerCase();
+        var tB = b.querySelector('.titulo').textContent.trim().toLowerCase();
+        return orden === 'az' ? tA.localeCompare(tB) : tB.localeCompare(tA);
+      });
+
+      visibles.forEach(function(card) {
+        catalogo.appendChild(card);
       });
     }
   </script>

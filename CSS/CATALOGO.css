@@ -151,7 +151,7 @@
 /* FORMULARIO DE RESERVA */
 .card form {
   margin-top: auto;
-  border-top: 1px solid rgba(0,0,0,0.08);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   padding-top: 10px;
 }
 
@@ -297,4 +297,69 @@
   cursor: not-allowed;
   pointer-events: none;
   margin-top: 8px;
+}
+
+/* BOTONES DE VISTA */
+.vista-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-vista {
+  padding: 8px 12px;
+  border: 1px solid #c8e6c9;
+  border-radius: 6px;
+  background-color: #f9fdf9;
+  color: #1a3e1f;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-vista:hover {
+  background-color: #2e6b35;
+  color: white;
+}
+
+.btn-vista.activo-vista {
+  background-color: #1a3e1f;
+  color: #C9A96E;
+  border-color: #1a3e1f;
+}
+
+/* VISTA LISTA */
+.catalogo.vista-lista {
+  grid-template-columns: 1fr;
+}
+
+.catalogo.vista-lista .card {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+}
+
+.catalogo.vista-lista .card img {
+  width: 70px;
+  height: 90px;
+  flex-shrink: 0;
+}
+
+.catalogo.vista-lista .card form {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.catalogo.vista-lista .reserva-cantidad {
+  margin-bottom: 0;
+}
+
+.catalogo.vista-lista .disponibilidad {
+  margin: 0;
 }
