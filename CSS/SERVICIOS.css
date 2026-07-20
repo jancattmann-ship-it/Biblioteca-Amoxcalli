@@ -56,6 +56,14 @@ main p {
   flex-shrink: 0;
 }
 
+.tarjeta-header video {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
 /* CUERPO DE TARJETA */
 .tarjeta-body {
   padding: 14px 16px;

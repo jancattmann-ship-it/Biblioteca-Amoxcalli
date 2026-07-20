@@ -1,0 +1,124 @@
+como dato, arregla los errores ortograficos y el orden en el que fui anotando los libros no sigue un patron, acomodalos 
+le tome foto a cada libro, aun que gracias  a que mi camara no es buena, se ven mas malos y menos ssaturados, baja calidad y angulo malo, entonces, si me pasas algun link para bajar las fotos, estaria perfecto, ya encontre el catalogo de fondo de cultura economica, de los demas no
+si hay algun error, alguna cosa que necesites que te aclare, mencionameelo, con respecto a lo de las imagenes,  no se que te pareceria mejor, si ya lo pusieras directamente en la bd, siguiendo un patron, como el nombre casi completo o yo lo agrego para no tener que ir viendo la bd o como esta el buissness
+
+*DATOS*
+Nombre completo  /  Categoria principal /  Subcategoria   /  Autor   /  
+
+ VIOLETA: 
+Lunatica - violeta - no - Martha riva palacio y merce lopez
+el libro que canta - violeta - no - Yolanda reyes y cristina lopez
+Niñas - violeta - no - Marta vicente 
+Las amistades peligrosas - violeta - no - choderlos de laclos (creo que ese es)
+los sueños - violeta - no - elsa cross
+la piel del cielo - violeta -  no - elena poniatowska
+Balun Canan - violeta -  no -  rosario castellanos 
+el sueño correccto - biblioteca universal no - aline davidoff
+
+BIBLIOTECA UNIVERSAL 
+
+comedias - biblioteca universal - no (todavia no se, creo no) - Shakespeare
+poetas dramaticos españoles I (1) - biblioteca universal - no - varios autores
+Poetas dramaticos españoles II (2) - biblioteca universal- no - varios autores 
+Tragedias - biblioteca universal - no - Shakespeare
+poetas liricos en lengua inglesa - biblioteca universal - varios autores
+Grandes cuentistas - biblioteca universal - no - varios autores
+Fausto -  biblioteca universal - no -  goethe
+Fausto -  biblioteca universal - no -  goethe (igual hay dos)
+literatura epistolar -  biblioteca universal - no - varios de autores
+literatura epistolar -  biblioteca universal - no - varios de autores (hay dos de este)
+historiadores de indias - biblioteca universal no - varios autores 
+historiadores de indias - biblioteca universal no - varios autores (igual hay dos)
+obras escogidas - biblioteca universal - no - quevedo
+obras escogidas - biblioteca universal - no - quevedo (igual hay dos)
+moralistas castellanos - biblioteca universal - no - guevara, valdes, vives, saavedra fajardo, gracian
+moralistas castellanos - biblioteca universal - no - guevara, valdes, vives, saavedra fajardo, gracian (igual hay dos)
+poetas dramaticos griegos - biblioteca universal - no - esquilo, sofocles, euripides, aristofanes
+poetas dramaticos griegos - biblioteca universal - no - esquilo, sofocles, euripides, aristofanes (igual hay dos)
+escritos escogidas - biblioteca universal - no - pascal, bossuet
+ensayos - biblioteca universal - no - montaigne
+ensayistas ingleses - biblioteca universal - no - varios autores
+el ingenioso hidalgo don quijote de la mancha I (1) - biblioteca universal - no - cervantes 
+teatro - biblioteca universal - no - calderon 
+teatro - biblioteca universal - no - lope de vega
+obras poeticas - biblioteca universal - no - virgilio horacio
+dialogos socraticos - biblioteca universal - no - platon
+obras escogidas - biblioteca universal - no - voltaire, diderot
+obras escogidas - biblioteca universal - no - voltaire, diderot (igual hay dos)
+arte de la biografia - biblioteca universal - no -  varios autores 
+arte de la biografia - biblioteca universal - no -  varios autores (igual hay dos)
+antologia de poetas liricos castellanos - biblioteca universal - no - varios autores
+las confesiones - biblioteca universal - no - rousseau
+la divina comedia - biblioteca universal - no - dante
+de los heroes hombres representativos - biblioteca universal - no - carlyle y emerson
+escritores misticos españoles - biblioteca universal - no - fray luis de granada, santa teresa de jesus, fray luis de leon
+obras filosoficas - biblioteca universal - no - aristoceles 
+tratados morales - biblioteca universal - no - ciceron y seneca
+socraticas economia ciropedia - biblioteca universal -  no -  jenofonte
+la iliada - biblioteca universal -  no -  homero
+grandes escritores rusos - biblioteca universal - no -  varios autores
+novelas y cuentos  - biblioteca universal - no - dostoievski y tolstoi
+
+CIENCIAS (aca estaran en lugar de categoria, la Subcategoria tipo biologia o fisica)
+como insectos, aves, serpientes, mamiferos, plantas
+
+tipo Nombre completo  /  subcategoria /  tema   /  Autor   /  
+
+los insectos - biologia - insectos - maryellen gregoire
+guia de aves (corredor biologico chichinautzin) - biologia - aves - (este es de gobierno: comision nacional de areas naturales protegidas, semarnat, gobierno federal)
+la herbolaria en mexico - biologia - plantas - xavier lozoya
+Pajaros - biologia - biologia - aves - susan canizares y pamela chanko
+las serpientes - biologia - serpientes - dr david kirshner y kim graham
+Guia de aves - biologia - aves - gianfranco bologna 
+la rata - biologia - mamiferos - patricio whitehouse
+los reptiles - biologia . reptiles - no aclarado
+aves acuaticas (de morelos) volumen I - biologia - aves - fernando urbina torres 
+aves acuaticas (de morelos) volumen ii - biologia - aves - fernando urbina torres 
+Mariposa monarca en mexico - biologia - insectos - no especificadoo por que son es de gobierno 
+Mariposa monarca en mexico - biologia - insectos - no especificadoo por que son es de gobierno (son dos)
+manual para identificacion en campo de especies de flora para la restauracion ecologica de la selva lacandona - biologia - platas - varios
+the national audobon society baby elephant folio "Audobonis birds of america" - biologia - aves - roger tory peterson 
+plantas sin flor - biologia - plantas - varios o no especificadoo
+aves rapaces de mexico - biologia - aves - fernando urbina torres y guillermo morales gonzalez
+
+
+
+ESTO VA IR EN UNA CATEGORIA NUEVA LLAMADA "fondo de cultura economica" o por sus siglas "FCE" aun que en el logo esta acomodado de otra forma, algo mas como "cFe" que es la editorial,  todos estos son de la coleccion "21 PARA EL 21" algo asi
+los temas  para el filtro de esta (igual que la de nuevos, sin niveles extra) los temas o subcategoria para el filtro quedan vacias por ahora
+
+tipo Nombre completo  /  (Aca no pondre categoria principal por que todas son de del fondo de cultura economica) /  categoria   /  Autor   /  
+
+Tiene la noche un arbol - no se - guadalupe dueñas
+breve historia de la guerra con los estados unidos - no - jose c. valdez 
+antologia de poesia mexicana del siglo xix - no - Ezra Alcázar y  Negrín Muñoz
+canek - no - ermilo abreu gomez 
+la sombra del cuadillo - no -  martin luis guzman
+pueblo en vilo - no - luis gonzalez y gonzalez
+cronicas de amor, de historia y de guerra - no - guillermo prieto
+apocalipstick - no - caarlos monsivais
+tomóchic - no - heriberto frias 
+tiempo de ladrones la historia de chucho el roto - no - emilio carballido
+paseo de la reforma - no - elena poniatowska
+y matarazo no llamo... - no - elena garro
+los de abajo - no - mariano azuela
+el libro rojo de la independencia - no - vicente riva palacio, manuel payno
+noticias biograficas de insurgentes apodados - no - elias amador 
+rio subterraneo - no - ines arredondo
+el libro vacio - no - josefina vicens
+la maravillosa vida breve de ernesto guevara (este ya no es de la coleccion  21 PARA EL 21, entonces no sigue la estetica y no se si dejarlo) - no - eduardo galeano
+
+
+ESTA TAMBIEN ES UNA CATEGORIA NNUEVA LLAMADA "Fonde editorial del estado de morelos" o por sus siglas "FEDEM" es otra editorial
+al igual que nuevos, no habbra otra pagina de categorias sino el filtro
+los temas son con su  respectivo color
+
+Dramaturgia morado, poesia rojo, narrativa verde claro, ensayo azzul, (los colores exactos te los paso yo, pues todos los libros siguen el color de el tema, entonces que sea el mismo)
+
+tipo Nombre completo  /  (Aca no pondre categoria principal por que todas son de FEDEM) /  categoria   /  Autor   /  
+
+no te olvides de mi, berlin - ensayo - maria teresa meneses
+necroescritura de los dias muy vivos - ensayo - alma karla sandoval
+Zafras de tiempo y memoria - narrativa - carmen gamiño
+poetica de la plegaria - poesia - xochiquetzal salazar garcia
+la infancia es la certeza de las cosas sucias, rotas y muertas - poesia - denisse buendia castañeda
+rayo de luz - dramaturgia - luis aldama

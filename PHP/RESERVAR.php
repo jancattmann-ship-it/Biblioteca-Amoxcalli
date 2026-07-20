@@ -94,9 +94,7 @@ mysqli_close($con);
         </div>
         <div class="header-login">
             <a href="../PHP/LOGIN.php" class="btn-header-login">
-                <img src="../IMAGENES/libro_verde.png" alt="Cuenta" class="icono-cuenta">
-                <?php echo isset($_SESSION["usuario"]) ? htmlspecialchars($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?>
-            </a>
+                <img src="../IMAGENES/cuenta.png" alt="Cuenta" class="icono-header-pixel"> <span class="texto-cuenta"><?php echo isset($_SESSION["usuario"]) ? ($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?></span></a>
         </div>
     </header>
 
@@ -128,7 +126,7 @@ mysqli_close($con);
 
             <!-- ENCABEZADO -->
             <div class="ticket-header">
-                <img src="../IMAGENES/libro_Encantado.gif" alt="Préstamo" class="icono-pagina">
+                <video src="../IMAGENES/libro_Encantado.webm" class="icono-pagina" autoplay loop muted playsinline></video>
                 <h2>Ticket de Préstamo</h2>
             </div>
 

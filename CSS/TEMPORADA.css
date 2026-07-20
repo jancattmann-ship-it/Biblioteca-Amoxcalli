@@ -20,3 +20,12 @@ main p {
   border: 3px solid #C9A96E;
   box-shadow: 0 5px 14px rgba(0, 0, 0, 0.13);
 }
+
+.aviso-cupos {
+  background-color: #e8f5e9;
+  border-left: 4px solid #2e6b35;
+  color: #2e6b35;
+  padding: 10px 14px;
+  border-radius: 5px;
+  font-size: 0.95em;
+}

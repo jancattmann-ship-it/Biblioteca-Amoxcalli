@@ -76,7 +76,8 @@ nav ul li a {
   font-size: 0.9em;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background-color 0.2s, color 0.2s;
-  border-bottom: 3px solid transparent; /*arreglar error en mas */
+  border-bottom: 3px solid transparent;
+  /*arreglar error en mas */
 }
 
 nav ul li a:hover {
@@ -133,6 +134,11 @@ main p {
   object-fit: contain;
   display: block;
   border-radius: 8px;
+}
+
+video.icono-pagina {
+  object-fit: cover;
+  background-color: transparent;
 }
 
 /* H2 sin .titulo-pagina */
@@ -430,10 +436,11 @@ noscript p {
 }
 
 .btn-header-login {
-  color: #C9A96E;
+  color: #1a3e1f;
   text-decoration: none;
   font-size: 0.88em;
   font-weight: 600;
+  background-color: #C9A96E;
   border: 1px solid #C9A96E;
   padding: 5px 12px;
   border-radius: 4px;
@@ -445,16 +452,85 @@ noscript p {
 }
 
 .btn-header-login:hover {
-  background-color: #C9A96E;
-  color: #1a3e1f;
+  background-color: #1a3e1f;
+  color: #C9A96E;
 }
 
 .icono-cuenta {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   vertical-align: middle;
   margin-right: 5px;
   object-fit: contain;
+}
+
+.icono-header-pixel {
+  /*Nuevas lineas para la barra de busqueda y icono pixel art */
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
+  object-fit: contain;
+}
+
+.btn-header-accion {
+  background: none;
+  border: none;
+  padding: 4px;
+  margin-right: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-header-accion img {
+  margin-right: 0;
+}
+
+.btn-header-accion:hover {
+  background-color: rgba(201, 169, 110, 0.15);
+  transform: scale(1.08);
+}
+
+.barra-busqueda-desplegable {
+  background-color: #143318;
+  border-bottom: 2px solid #2e6b35;
+  padding: 14px 40px;
+}
+
+.form-busqueda-header {
+  display: flex;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-busqueda-header input[type="text"] {
+  flex: 1;
+  padding: 9px 14px;
+  border: 1px solid #2e6b35;
+  border-radius: 6px;
+  font-size: 0.92em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fdf9;
+  outline: none;
+}
+
+.form-busqueda-header button {
+  padding: 9px 18px;
+  background-color: #C9A96E;
+  color: #1a3e1f;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form-busqueda-header button:hover {
+  background-color: #b8914d;
 }
 
 /* BOTÓN FLOTANTE: VOLVER ARRIBA */
@@ -533,6 +609,10 @@ noscript p {
     height: 32px;
     font-size: 0.78em;
   }
+
+  .texto-cuenta {
+    display: none;
+  }
 }
 
 /* ANIMACIÓN FADE-IN AL HACER SCROLL */
@@ -593,4 +673,9 @@ nav ul li .dropdown a:hover {
   font-size: 0.7em;
   margin-left: 4px;
   vertical-align: middle;
+}
+
+/* BOTÓN CUENTA — ocultar texto en móvil, dejar solo ícono */
+.texto-cuenta {
+  display: none;
 }

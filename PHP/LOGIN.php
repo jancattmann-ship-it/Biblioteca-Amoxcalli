@@ -141,10 +141,7 @@ if (isset($_POST["iniciar_sesion"])) {
         </div>
         <div class="header-login">
             <a href="PHP/LOGIN.php" class="btn-header-login">
-                <img src="../IMAGENES/libro_verde.png" alt="Cuenta" class="icono-cuenta">
-                <?php echo isset($_SESSION["usuario"]) ? ($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?>
-            </a>
-        </div>
+                <img src="../IMAGENES/cuenta.png" alt="Cuenta" class="icono-header-pixel"> <span class="texto-cuenta"><?php echo isset($_SESSION["usuario"]) ? ($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?></span></a>
         </div>
     </header>
 

@@ -29,9 +29,21 @@ include_once("PHP/CONTADOR.php");
       <p>Tu biblioteca de confianza</p>
     </div>
     <div class="header-login">
+      <button type="button" id="btn-toggle-busqueda" class="btn-header-accion" aria-label="Buscar libros">
+        <img src="IMAGENES/lupa.png" alt="Buscar" class="icono-header-pixel">
+      </button>
       <a href="PHP/LOGIN.php" class="btn-header-login">
-        <img src="IMAGENES/libro_verde.png" alt="Cuenta" class="icono-cuenta"> <?php echo isset($_SESSION["usuario"]) ? ($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?> </a>
+        <img src="IMAGENES/cuenta.png" alt="Cuenta" class="icono-header-pixel"> <span class="texto-cuenta"><?php echo isset($_SESSION["usuario"]) ? ($_SESSION["usuario"]["nombre"]) : "Mi cuenta"; ?></span></a>
+      </a>
     </div>
+  </header>
+
+  <div id="barra-busqueda" class="barra-busqueda-desplegable" hidden>
+    <form action="PHP/CATALOGO.php" method="get" class="form-busqueda-header">
+      <input type="text" name="buscar" placeholder="Buscar libro por título..." autocomplete="off">
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
   </header>
   <nav> <!-- MENU antiguo -->
     <ul>
@@ -87,7 +99,7 @@ include_once("PHP/CONTADOR.php");
         <small>Ver todos</small>
       </a>
       <a href="PHP/CATALOGO.php" class="tarjeta fade-in-scroll">
-        <img src="IMAGENES/libro_Encantado.gif" alt="Catálogo">
+        <video src="/IMAGENES/libro_Encantado.webm" class="icono-pagina" autoplay loop muted playsinline></video>
         <p>Catálogo</p>
         <small>Ver libros</small>
       </a>
@@ -98,18 +110,29 @@ include_once("PHP/CONTADOR.php");
       </a>
     </div>
 
-    <div class="libro-del-mes">
-      <div class="libro-del-mes-imagen">
-        <img src="IMAGENES/libro_Encantado.gif" alt="Libro del mes">
+    <div class="info-lateral info-lateral--rosa">
+      <div class="info-lateral-imagen">
+        <img src="IMAGENES/vacaciones2.jpg" alt="Mis Vacaciones en la Biblioteca 2026">
       </div>
-      <div class="libro-del-mes-info">
-        <span class="libro-del-mes-etiqueta">Libro del mes</span>
-        <h3>Nombre del libro destacado</h3>
-        <p>Aquí va una breve descripción de por qué este libro es la recomendación del mes.</p>
-        <a href="PHP/CATALOGO.php" class="btn-regresar">Ver en el catálogo</a>
+      <div class="info-lateral-texto">
+        <span class="info-lateral-etiqueta">¡Inscríbete ya!</span>
+        <h3>Mis Vacaciones en la Biblioteca 2026</h3>
+        <p>Del 20 al 31 de julio, de 9:00 a.m. a 12:00 p.m. Taller de lectura y actividades para niñas y niños de 7 a 13 años. Cupos limitados.</p>
+        <a href="HTML/TEMPORADA.html" class="btn-regresar">Más información</a>
       </div>
     </div>
 
+    <div class="info-lateral info-lateral--verde info-lateral--derecha">
+      <div class="info-lateral-imagen">
+        <img src="IMAGENES/cincuenta_años.jpg" alt="Libro del mes">
+      </div>
+      <div class="info-lateral-texto">
+        <span class="info-lateral-etiqueta">Libro del mes</span>
+        <h3>Cincuenta años de Shinzaburo Takeda en México</h3>
+        <p>Shinzaburo Takeda, un artista enriquecido por la paciencia y precisión técnica de su natal Japón, y la belleza, colores y magias del mundo oaxaqueño.</p>
+        <a href="PHP/CATALOGO.php?cat=nuevos" class="btn-regresar">Ver en el catálogo</a>
+      </div>
+    </div>
     <div class="frase-bloque"> <!-- FRASE -->
       <p>"Somos una red de apoyo para esta comunidad donde la convivencia sana y la integración familiar es lo
         principal."</p>
@@ -201,6 +224,16 @@ include_once("PHP/CONTADOR.php");
     <button onclick="cambiarTamano(-2)" aria-label="Disminuir tamaño de texto">A-</button>
     <button onclick="cambiarTamano(2)" aria-label="Aumentar tamaño de texto">A+</button>
   </div>
+
+  <script>
+    document.getElementById('btn-toggle-busqueda').addEventListener('click', function () {
+      var barra = document.getElementById('barra-busqueda');
+      barra.hidden = !barra.hidden;
+      if (!barra.hidden) {
+        barra.querySelector('input').focus();
+      }
+    });
+  </script>
 
   <script src="JS/HERRAMIENTAS.js"></script>
 

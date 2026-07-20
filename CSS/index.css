@@ -66,6 +66,15 @@
   display: block;
 }
 
+.tarjeta video {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  margin: 0 auto 10px;
+  display: block;
+  border-radius: 6px;
+}
+
 .tarjeta p {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 600;
@@ -196,43 +205,106 @@
   border-radius: 12px;
 }
 
-/* LIBRO DEL MES */
-.libro-del-mes {
+/* BLOQUE LATERAL COMPARTIDO (Libro del mes / Invitación al taller) */
+.info-lateral {
   display: flex;
   align-items: center;
   gap: 24px;
-  background-color: #f5faf5;
-  border-left: 5px solid #C9A96E;
   border-radius: 8px;
   padding: 20px 24px;
   margin-bottom: 28px;
   flex-wrap: wrap;
+  border-left: 5px solid #C9A96E;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
-.libro-del-mes-imagen img {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+.info-lateral:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(26, 62, 31, 0.12);
+}
+
+.info-lateral-imagen {
+  flex: 0 0 110px;
+}
+
+.info-lateral-imagen img {
+  width: 110px;
+  height: 150px;
+  object-fit: cover;
   border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(26, 62, 31, 0.15);
 }
 
-.libro-del-mes-etiqueta {
+.info-lateral-texto {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.info-lateral-etiqueta {
   display: inline-block;
-  background-color: #1a3e1f;
-  color: #e8f5e9;
-  font-size: 0.78em;
+  color: white;
+  font-size: 0.9em;
   font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 8px;
+  padding: 6px 16px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
-.libro-del-mes-info h3 {
+.info-lateral-texto h3 {
   margin-top: 4px;
   margin-bottom: 8px;
 }
 
-.libro-del-mes-info p {
+.info-lateral-texto p {
   margin-bottom: 12px;
   text-align: left;
+}
+
+/* VARIANTE VERDE — Libro del mes */
+.info-lateral--verde {
+  background-color: #f5faf5;
+}
+
+.info-lateral--verde:hover {
+  background-color: #dcf0dd;
+  border-left-color: #2e6b35;
+}
+
+.info-lateral--verde .info-lateral-etiqueta {
+  background-color: #1a3e1f;
+}
+
+/* VARIANTE ROSA — Invitación al taller */
+.info-lateral--rosa {
+  background-color: #fdf1f5;
+}
+
+.info-lateral--rosa:hover {
+  background-color: #fbe4ec;
+  border-left-color: #e75480;
+}
+
+.info-lateral--rosa .info-lateral-etiqueta {
+  background-color: #e75480;
+}
+
+@media (max-width: 768px) {
+  .info-lateral {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-lateral-imagen {
+    flex: 0 0 auto;
+  }
+
+  .info-lateral-texto {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .info-lateral-texto p {
+    text-align: center;
+  }
 }
